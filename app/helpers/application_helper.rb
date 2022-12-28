@@ -1,4 +1,6 @@
 module ApplicationHelper
+end
+module ApplicationHelper
   include Utilidades
   include Permisos
   include Bitacoras
@@ -8,13 +10,13 @@ module ApplicationHelper
     parametros = Parametro.where(:user_id => current_user.id).first
 
     if (parametros != nil) then
-      id_empresa_actual = parametros.empresa_id        
+      id_empresa_actual = parametros.empresa_id
       return id_empresa_actual
     else
       return id_empresa_actual = ''
-    end       
+    end
   end
-  
+
   def current_user_name
     persona = Persona.where(user_id: current_user.id).first
 
@@ -78,7 +80,7 @@ module ApplicationHelper
       "collapse-item"
     end
   end
-  
+
   # METODOS DE ACTIVACION EN SIDEBAR - INICIO
   def is_home_active
     if params[:controller] == "home"
