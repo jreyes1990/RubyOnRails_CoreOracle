@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
-  
+
   root to: 'home#index'
   get 'home/index' => "home#index", as: 'home'
   post 'home/cambio_password_user' => "home#cambio_password_user", as: 'cambio_password_user'
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :areas, :path => 'AR' do
       member do
        get 'I' => "areas#inactivar_area", as: 'inactivar'
-       get 'A' => "areas#activar_area", as: 'activar' 
+       get 'A' => "areas#activar_area", as: 'activar'
       end
     end
     # Ruta para ingresar nuevas empresas dentro del formulario del modelo de Area
@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     resources :personas
     get 'personas/show/:id' => "personas#show", as: 'ver_perfil'
     get "/persona/modal_cambio_contra/:persona_id" => "personas#modal_cambiar_contrasena", as: "modal_cambiar_contrasena"
-    post "personas/registrar_cambio_contrasena"  
+    post "personas/registrar_cambio_contrasena"
     get 'personas/inactivar/:id' => "personas#inactivar_persona", as: 'inactivar_persona'
     get 'personas/activar/:id' => "personas#activar_persona", as: 'activar_persona'
     #get 'personas/show'
