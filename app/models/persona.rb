@@ -2,20 +2,20 @@
 #
 # Table name: personas
 #
-#  id               :integer          not null, primary key
-#  apellido         :string(200)
-#  chat_id_telegram :integer
-#  direccion        :string(255)
-#  estado           :string(10)
-#  foto             :text
-#  nombre           :string(200)
-#  telefono         :integer
-#  token            :string(1000)
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  user_created_id  :integer
-#  user_id          :integer          not null
-#  user_updated_id  :integer
+#  id(Identificador de la llave primaria)                                        :integer          not null, primary key
+#  apellido(Apellido de la persona)                                              :string(200)      not null
+#  chat_id_telegram                                                              :integer
+#  direccion                                                                     :string(255)
+#  estado(Estado de la persona: [A]: Activo  [I]: Inactivo)                      :string(10)       default("A"), not null
+#  foto(Foto de la persona)                                                      :text
+#  nombre(Nombre de la persona)                                                  :string(200)      not null
+#  telefono                                                                      :integer
+#  token                                                                         :string(1000)
+#  created_at(Fecha y hora al registrar datos)                                   :datetime         not null
+#  updated_at(Fecha y hora al actualizar datos)                                  :datetime         not null
+#  user_created_id(Identificador de usuario al registrar en la aplicaci??n web)  :integer          not null
+#  user_id(Identificador del usuario)                                            :integer          not null
+#  user_updated_id(Identificador de usuario al actualizar en la aplicaci??n web) :integer
 #
 # Indexes
 #
@@ -23,7 +23,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  fk_persona_user  (user_id => users.id)
 #
 class Persona < ApplicationRecord
   belongs_to :user

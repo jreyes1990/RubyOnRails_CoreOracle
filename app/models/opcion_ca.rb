@@ -2,16 +2,16 @@
 #
 # Table name: opcion_cas
 #
-#  id              :integer          not null, primary key
-#  descripcion     :string(255)
-#  estado          :string(10)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  atributo_id     :integer          not null
-#  componente_id   :integer          not null
-#  opcion_id       :integer          not null
-#  user_created_id :integer
-#  user_updated_id :integer
+#  id(Identificador de la llave primaria)                                        :integer          not null, primary key
+#  descripcion(Descripci??n general de la opci??n_ca)                            :string(255)
+#  estado(Estado de la opci??n-componente-atributo: [A]: Activo  [I]: Inactivo)  :string(10)       default("A"), not null
+#  created_at(Fecha y hora al registrar datos)                                   :datetime         not null
+#  updated_at(Fecha y hora al actualizar datos)                                  :datetime         not null
+#  atributo_id(Identificador del atributo para la opci??n_ca)                    :integer          not null
+#  componente_id(Identificador del componente para la opci??n_ca)                :integer          not null
+#  opcion_id(Identificador del menu para la opci??n_ca)                          :integer          not null
+#  user_created_id(Identificador de usuario al registrar en la aplicaci??n web)  :integer          not null
+#  user_updated_id(Identificador de usuario al actualizar en la aplicaci??n web) :integer
 #
 # Indexes
 #
@@ -21,9 +21,9 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (atributo_id => atributos.id)
-#  fk_rails_...  (componente_id => componentes.id)
-#  fk_rails_...  (opcion_id => opciones.id)
+#  fk_opcionca_atributo    (atributo_id => atributos.id)
+#  fk_opcionca_componente  (componente_id => componentes.id)
+#  fk_opcionca_opcion      (opcion_id => opciones.id)
 #
 class OpcionCa < ApplicationRecord
   belongs_to :opcion

@@ -1,6 +1,6 @@
-#ENV['TZ'] = 'America/Guatemala'
-ENV['NLS_LANG'] ||= 'AMERICAN_AMERICA.WE8ISO8859P1'
-#ENV['TZ'] = 'GT'
+# ENV['TZ'] = 'America/Guatemala'
+# ENV['NLS_LANG'] ||= 'AMERICAN_AMERICA.WE8ISO8859P1'
+# ENV['TZ'] = 'GT'
 plsql.activerecord_class = ActiveRecord::Base
 ActiveSupport.on_load(:active_record) do
   ActiveRecord::ConnectionAdapters::OracleEnhancedAdapter.class_eval do

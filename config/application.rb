@@ -20,7 +20,7 @@ module CoreRails
     config.i18n.default_locale = :es
     config.i18n.available_locales = [:en, :es]
     config.time_zone = "Central America"
-
+    config.encoding = "utf-8"
     config.session_store :active_record_store,
                          :key => '_redmine_session'
   end

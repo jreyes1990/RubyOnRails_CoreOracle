@@ -4,14 +4,14 @@
 #
 #  id               :integer          not null, primary key
 #  codigo_area      :integer
-#  codigo_empresa   :integer
+#  codigo_empresa   :integer          not null
 #  codigo_hex_area  :string(255)
 #  codigo_hex_rol   :string(255)
 #  descripcion      :string(255)
 #  email_usuario    :string(255)      not null
-#  estado           :string(10)
+#  estado           :string(10)       not null
 #  nombre_area      :string(200)
-#  nombre_empresa   :string(200)
+#  nombre_empresa   :string(200)      not null
 #  nombre_rol       :string(200)
 #  nombre_usuario   :string(401)
 #  telefono_usuario :integer
@@ -21,7 +21,7 @@
 #  empresa_id       :integer          not null
 #  persona_id       :integer          not null
 #  rol_id           :integer
-#  user_created_id  :integer
+#  user_created_id  :integer          not null
 #  user_id          :integer          not null
 #  user_updated_id  :integer
 #

@@ -1,15 +1,16 @@
 default: &default
   adapter: oracle_enhanced
-  encoding: unicode
+  # encoding: unicode
+  encoding: utf8
   host: localhost
-  username: sifd
-  password: Adm1n5174*2024
   port: 1521
-  database: XE
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
+  username: sifd
+  password: Adm1n5174*2024
+  database: XE
 
 test:
   <<: *default

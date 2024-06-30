@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_03_040450) do
+ActiveRecord::Schema.define(version: 2024_08_30_051241) do
 
-  create_table "action_text_rich_texts", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "body"
+  create_table "action_text_rich_texts", comment: "Cat??logo de texto enriquecido", force: :cascade do |t|
     t.string "record_type", null: false
-    t.integer "record_id", precision: 38, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.integer "record_id", precision: 38, null: false, comment: "Identificador del record"
+    t.string "name", null: false, comment: "Nombre del texto enriquecido"
+    t.text "body", comment: "Texto general del texto enriquecido"
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
     t.index ["record_type", "record_id", "name"], name: "udx_action_text_rich_texts", unique: true
   end
 
@@ -43,52 +43,52 @@ ActiveRecord::Schema.define(version: 2024_03_03_040450) do
     t.index ["key"], name: "i_active_storage_blobs_key", unique: true
   end
 
-  create_table "areas", force: :cascade do |t|
-    t.integer "codigo_area", precision: 38
-    t.string "nombre", limit: 200
-    t.string "codigo_hex"
-    t.string "descripcion"
-    t.integer "user_created_id", precision: 38
-    t.integer "user_updated_id", precision: 38
-    t.string "estado", limit: 10
-    t.integer "empresa_id", precision: 38, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table "areas", comment: "Cat??logo de ??reas por empresa", force: :cascade do |t|
+    t.integer "empresa_id", precision: 38, null: false, comment: "Identificador de la empresa para la el ??rea"
+    t.integer "codigo_area", precision: 38, comment: "Identificador del c??digo del ??rea"
+    t.string "nombre", limit: 200, comment: "Nombre del ??rea"
+    t.string "descripcion", comment: "Descripci??n general del ??rea"
+    t.string "codigo_hex", comment: "Identificador del color codigo hexadecimal para el ??rea"
+    t.integer "user_created_id", precision: 38, comment: "Identificador de usuario al registrar en la aplicaci??n web"
+    t.integer "user_updated_id", precision: 38, null: false, comment: "Identificador de usuario al actualizar en la aplicaci??n web"
+    t.string "estado", limit: 10, default: "A", null: false, comment: "Estado del ??rea: [A]: Activo  [I]: Inactivo"
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
     t.index ["empresa_id"], name: "index_areas_on_empresa_id"
   end
 
-  create_table "atributos", force: :cascade do |t|
-    t.string "nombre", limit: 200
-    t.string "descripcion"
-    t.integer "user_created_id", precision: 38
-    t.integer "user_updated_id", precision: 38
-    t.string "estado", limit: 10
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table "atributos", comment: "Cat??logo de atributos", force: :cascade do |t|
+    t.string "nombre", limit: 200, null: false, comment: "Nombre del atributo"
+    t.string "descripcion", comment: "Descripci??n general del atributo"
+    t.integer "user_created_id", precision: 38, comment: "Identificador de usuario al registrar en la aplicaci??n web"
+    t.integer "user_updated_id", precision: 38, null: false, comment: "Identificador de usuario al actualizar en la aplicaci??n web"
+    t.string "estado", limit: 10, default: "A", null: false, comment: "Estado del atributo: [A]: Activo  [I]: Inactivo"
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
   end
 
-  create_table "codigo_colores", force: :cascade do |t|
+  create_table "codigo_colores", comment: "Cat??logo de codigo de colores", force: :cascade do |t|
     t.string "disenio", limit: 50
-    t.string "nombre_color", limit: 100
-    t.string "colores", limit: 25
-    t.string "codigo_hex", limit: 25
-    t.string "codigo_rgb", limit: 50
-    t.string "codigo_hls", limit: 50
-    t.integer "user_created_id", precision: 38
-    t.integer "user_updated_id", precision: 38
-    t.string "estado", limit: 10
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "nombre_color", limit: 100, comment: "Nombre del color"
+    t.string "colores", limit: 25, comment: "Identificador del color"
+    t.string "codigo_hex", limit: 25, comment: "Identificador del color, codigo hexadecimal"
+    t.string "codigo_rgb", limit: 50, comment: "Identificador del color, codigo RGB"
+    t.string "codigo_hls", limit: 50, comment: "Identificador del color, codigo HLS"
+    t.integer "user_created_id", precision: 38, comment: "Identificador de usuario al registrar en la aplicaci??n web"
+    t.integer "user_updated_id", precision: 38, null: false, comment: "Identificador de usuario al actualizar en la aplicaci??n web"
+    t.string "estado", limit: 10, default: "A", null: false, comment: "Estado de codigo de colores: [A]: Activo  [I]: Inactivo"
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
   end
 
-  create_table "componentes", force: :cascade do |t|
-    t.string "nombre", limit: 200
-    t.string "descripcion"
-    t.integer "user_created_id", precision: 38
-    t.integer "user_updated_id", precision: 38
-    t.string "estado", limit: 10
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table "componentes", comment: "Cat??logo de componentes", force: :cascade do |t|
+    t.string "nombre", limit: 200, null: false, comment: "Nombre del componente"
+    t.string "descripcion", comment: "Descripci??n general del componente"
+    t.integer "user_created_id", precision: 38, comment: "Identificador de usuario al registrar en la aplicaci??n web"
+    t.integer "user_updated_id", precision: 38, null: false, comment: "Identificador de usuario al actualizar en la aplicaci??n web"
+    t.string "estado", limit: 10, default: "A", null: false, comment: "Estado del componente: [A]: Activo  [I]: Inactivo"
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
   end
 
   create_table "credenciales_usuarios", force: :cascade do |t|
@@ -113,29 +113,29 @@ ActiveRecord::Schema.define(version: 2024_03_03_040450) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "empresas", force: :cascade do |t|
-    t.integer "codigo_empresa", precision: 38
-    t.string "nombre", limit: 200
-    t.string "codigo_hex"
-    t.string "descripcion"
-    t.integer "user_created_id", precision: 38
-    t.integer "user_updated_id", precision: 38
-    t.string "estado", limit: 10
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table "empresas", comment: "Cat??logo de empresas", force: :cascade do |t|
+    t.integer "codigo_empresa", precision: 38, null: false, comment: "Identificador codigo de la empresa"
+    t.string "nombre", limit: 200, null: false, comment: "Nombre de la empresa"
+    t.string "descripcion", comment: "Descripci??n general de la empresa"
+    t.string "codigo_hex", null: false, comment: "Identificador del color codigo hexadecimal para la empresa"
+    t.integer "user_created_id", precision: 38, null: false, comment: "Identificador de usuario al registrar en la aplicaci??n web"
+    t.integer "user_updated_id", precision: 38, comment: "Identificador de usuario al actualizar en la aplicaci??n web"
+    t.string "estado", limit: 10, default: "A", null: false, comment: "Estado de la empresa: [A]: Activo  [I]: Inactivo"
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
   end
 
-  create_table "font_awesomes", force: :cascade do |t|
-    t.string "icono", limit: 50
+  create_table "font_awesomes", comment: "Cat??logo de FontAwesomes", force: :cascade do |t|
+    t.string "icono", limit: 50, comment: "Identificador del icono"
     t.string "prefijo_nombre", limit: 150
     t.string "termino"
-    t.string "codigo_css", limit: 25
+    t.string "codigo_css", limit: 25, comment: "Identificador codigo CSS del icono"
     t.string "tipo_icono", limit: 50
-    t.integer "user_created_id", precision: 38
-    t.integer "user_updated_id", precision: 38
-    t.string "estado", limit: 10
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_created_id", precision: 38, comment: "Identificador de usuario al registrar en la aplicaci??n web"
+    t.integer "user_updated_id", precision: 38, null: false, comment: "Identificador de usuario al actualizar en la aplicaci??n web"
+    t.string "estado", limit: 10, default: "A", null: false, comment: "Estado del FontAwesome: [A]: Activo  [I]: Inactivo"
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -149,30 +149,31 @@ ActiveRecord::Schema.define(version: 2024_03_03_040450) do
     t.index ["sluggable_type", "sluggable_id"], name: "i_fri_id_slu_slu_typ_slu_id"
   end
 
-  create_table "menu_roles", force: :cascade do |t|
-    t.integer "menu_id", precision: 38
-    t.string "descripcion"
-    t.integer "user_created_id", precision: 38
-    t.integer "user_updated_id", precision: 38
-    t.string "estado", limit: 10
-    t.integer "opcion_id", precision: 38, null: false
-    t.integer "rol_id", precision: 38, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table "menu_roles", comment: "Cat??logo de men?? por rol", force: :cascade do |t|
+    t.integer "menu_id", precision: 38, null: false, comment: "Identificador del menu para la opci??n"
+    t.integer "opcion_id", precision: 38, null: false, comment: "Identificador de la opcion para el men??"
+    t.integer "rol_id", precision: 38, null: false, comment: "Identificador del rol para el men??-rol"
+    t.string "descripcion", comment: "Descripci??n general del men?? por rol"
+    t.integer "user_created_id", precision: 38, null: false, comment: "Identificador de usuario al registrar en la aplicaci??n web"
+    t.integer "user_updated_id", precision: 38, comment: "Identificador de usuario al actualizar en la aplicaci??n web"
+    t.string "estado", limit: 10, default: "A", null: false, comment: "Estado del men??-rol: [A]: Activo  [I]: Inactivo"
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
+    t.index ["menu_id"], name: "index_menu_roles_on_menu_id"
     t.index ["opcion_id"], name: "index_menu_roles_on_opcion_id"
     t.index ["rol_id"], name: "index_menu_roles_on_rol_id"
   end
 
-  create_table "menus", force: :cascade do |t|
-    t.string "nombre", limit: 200
-    t.string "descripcion"
-    t.string "icono", limit: 50
-    t.string "codigo_hex"
-    t.integer "user_created_id", precision: 38
-    t.integer "user_updated_id", precision: 38
-    t.string "estado", limit: 10
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table "menus", comment: "Cat??logo de men??s", force: :cascade do |t|
+    t.string "nombre", limit: 200, null: false, comment: "Nombre del men??"
+    t.string "descripcion", comment: "Descripci??n general del men??"
+    t.string "icono", limit: 50, null: false, comment: "Identificador de icono para el men??"
+    t.string "codigo_hex", null: false, comment: "Identificador de color, codigo hexadecimal para el men??"
+    t.integer "user_created_id", precision: 38, comment: "Identificador de usuario al registrar en la aplicaci??n web"
+    t.integer "user_updated_id", precision: 38, null: false, comment: "Identificador de usuario al actualizar en la aplicaci??n web"
+    t.string "estado", limit: 10, default: "A", null: false, comment: "Estado del men??: [A]: Activo  [I]: Inactivo"
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
   end
 
   create_table "old_passwords", force: :cascade do |t|
@@ -183,106 +184,109 @@ ActiveRecord::Schema.define(version: 2024_03_03_040450) do
     t.index ["password_archivable_type", "password_archivable_id"], name: "idx_old_passwords"
   end
 
-  create_table "opcion_cas", force: :cascade do |t|
-    t.string "descripcion"
-    t.integer "user_created_id", precision: 38
-    t.integer "user_updated_id", precision: 38
-    t.string "estado", limit: 10
-    t.integer "opcion_id", precision: 38, null: false
-    t.integer "componente_id", precision: 38, null: false
-    t.integer "atributo_id", precision: 38, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table "opcion_cas", comment: "Cat??logo de opcion-componente-atributos", force: :cascade do |t|
+    t.integer "opcion_id", precision: 38, null: false, comment: "Identificador del menu para la opci??n_ca"
+    t.integer "componente_id", precision: 38, null: false, comment: "Identificador del componente para la opci??n_ca"
+    t.integer "atributo_id", precision: 38, null: false, comment: "Identificador del atributo para la opci??n_ca"
+    t.string "descripcion", comment: "Descripci??n general de la opci??n_ca"
+    t.integer "user_created_id", precision: 38, null: false, comment: "Identificador de usuario al registrar en la aplicaci??n web"
+    t.integer "user_updated_id", precision: 38, comment: "Identificador de usuario al actualizar en la aplicaci??n web"
+    t.string "estado", limit: 10, default: "A", null: false, comment: "Estado de la opci??n-componente-atributo: [A]: Activo  [I]: Inactivo"
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
     t.index ["atributo_id"], name: "i_opcion_cas_atributo_id"
     t.index ["componente_id"], name: "i_opcion_cas_componente_id"
     t.index ["opcion_id"], name: "index_opcion_cas_on_opcion_id"
   end
 
   create_table "opciones", comment: "Cat??logo de opciones", force: :cascade do |t|
+    t.integer "menu_id", precision: 38, null: false, comment: "Identificador del menu para la opci??n"
     t.string "nombre", limit: 200, null: false, comment: "Nombre de la opci??n"
     t.string "descripcion", comment: "Descripci??n general de la opci??n"
     t.string "icono", limit: 50, comment: "Icono que identificar?? la opci??n"
     t.string "path", null: false, comment: "Identificador de ruta de navegaci??n"
     t.string "controlador", limit: 300, null: false, comment: "Identificador de controlador de navegaci??n"
     t.string "codigo_hex", comment: "Color Hexadecimal que identificar?? la opci??n"
-    t.integer "user_created_id", precision: 38, comment: "Identificador de usuario al registrar en la aplicaci??n web"
-    t.integer "user_updated_id", precision: 38, null: false, comment: "Identificador de usuario al actualizar en la aplicaci??n web"
-    t.string "estado", limit: 10, default: "A", null: false, comment: "Estado de la opci??n: [A]: Activo;  [I]: Inactivo"
+    t.integer "user_created_id", precision: 38, null: false, comment: "Identificador de usuario al registrar en la aplicaci??n web"
+    t.integer "user_updated_id", precision: 38, comment: "Identificador de usuario al actualizar en la aplicaci??n web"
+    t.string "estado", limit: 10, default: "A", null: false, comment: "Estado de la opci??n: [A]: Activo  [I]: Inactivo"
     t.string "aplica_carga_masiva", limit: 10
-    t.integer "menu_id", precision: 38, null: false, comment: "Identificador del menu para la opci??n"
     t.integer "posicion", precision: 38, comment: "Orden que tendra cada opci??n"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
     t.index ["menu_id"], name: "index_opciones_on_menu_id"
   end
 
-  create_table "parametros", force: :cascade do |t|
-    t.integer "area_id", precision: 38
+  create_table "parametros", comment: "Cat??logo de par??metros", force: :cascade do |t|
+    t.integer "empresa_id", precision: 38, null: false, comment: "Identificador de la empresa para el par??metro"
+    t.integer "area_id", precision: 38, null: false, comment: "Identificador del ??rea para el par??metro"
+    t.integer "user_id", precision: 38, null: false, comment: "Identificador del usuario para el par??metro"
     t.string "nombre_area"
-    t.integer "empresa_id", precision: 38
     t.string "nombre_empresa"
     t.string "ruta_predeterminada"
     t.string "view_default"
-    t.integer "user_id", precision: 38, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
+    t.index ["area_id"], name: "index_parametros_on_area_id"
+    t.index ["empresa_id"], name: "index_parametros_on_empresa_id"
     t.index ["user_id"], name: "index_parametros_on_user_id"
   end
 
-  create_table "persona_empresa_formularios", force: :cascade do |t|
-    t.string "descripcion"
-    t.integer "user_created_id", precision: 38
-    t.integer "user_updated_id", precision: 38
-    t.string "estado", limit: 10
-    t.integer "personas_area_id", precision: 38, null: false
-    t.integer "opcion_ca_id", precision: 38, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table "persona_empresa_formularios", comment: "M??dulo de persona empresa formularios", force: :cascade do |t|
+    t.integer "personas_area_id", precision: 38, null: false, comment: "Identificador de la persona por ??rea"
+    t.integer "opcion_ca_id", precision: 38, null: false, comment: "Identificador de la opcion-componente-atributo"
+    t.string "descripcion", comment: "Descripci??n general de la persona empresa formulario"
+    t.integer "user_created_id", precision: 38, null: false, comment: "Identificador de usuario al registrar en la aplicaci??n web"
+    t.integer "user_updated_id", precision: 38, comment: "Identificador de usuario al actualizar en la aplicaci??n web"
+    t.string "estado", limit: 10, default: "A", null: false, comment: "Estado de la persona empresa formulario: [A]: Activo  [I]: Inactivo"
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
     t.index ["opcion_ca_id"], name: "i_per_emp_for_opc_ca_id"
     t.index ["personas_area_id"], name: "i_per_emp_for_per_are_id"
   end
 
-  create_table "personas", force: :cascade do |t|
-    t.string "nombre", limit: 200
-    t.string "apellido", limit: 200
-    t.text "foto"
+  create_table "personas", comment: "Cat??logo de personas", force: :cascade do |t|
+    t.integer "user_id", precision: 38, null: false, comment: "Identificador del usuario"
+    t.string "nombre", limit: 200, null: false, comment: "Nombre de la persona"
+    t.string "apellido", limit: 200, null: false, comment: "Apellido de la persona"
+    t.text "foto", comment: "Foto de la persona"
     t.integer "telefono", precision: 38
     t.integer "chat_id_telegram", precision: 38
     t.string "direccion"
     t.string "token", limit: 1000
-    t.integer "user_created_id", precision: 38
-    t.integer "user_updated_id", precision: 38
-    t.string "estado", limit: 10
-    t.integer "user_id", precision: 38, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_created_id", precision: 38, null: false, comment: "Identificador de usuario al registrar en la aplicaci??n web"
+    t.integer "user_updated_id", precision: 38, comment: "Identificador de usuario al actualizar en la aplicaci??n web"
+    t.string "estado", limit: 10, default: "A", null: false, comment: "Estado de la persona: [A]: Activo  [I]: Inactivo"
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
     t.index ["user_id"], name: "index_personas_on_user_id"
   end
 
-  create_table "personas_areas", force: :cascade do |t|
-    t.string "descripcion"
-    t.integer "user_created_id", precision: 38
-    t.integer "user_updated_id", precision: 38
-    t.string "estado", limit: 10
-    t.integer "rol_id", precision: 38
-    t.integer "persona_id", precision: 38, null: false
-    t.integer "area_id", precision: 38, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table "personas_areas", comment: "Cat??logo de personas por ??rea", force: :cascade do |t|
+    t.integer "persona_id", precision: 38, null: false, comment: "Identificador de la persona para la persona por ??rea"
+    t.integer "area_id", precision: 38, null: false, comment: "Identificador del ??rea para la persona por ??rea"
+    t.integer "rol_id", precision: 38, comment: "Identificador del rol para la persona por ??rea"
+    t.string "descripcion", comment: "Descripci??n general de la persona por ??rea"
+    t.integer "user_created_id", precision: 38, null: false, comment: "Identificador de usuario al registrar en la aplicaci??n web"
+    t.integer "user_updated_id", precision: 38, comment: "Identificador de usuario al actualizar en la aplicaci??n web"
+    t.string "estado", limit: 10, default: "A", null: false, comment: "Estado de la persona por ??rea: [A]: Activo  [I]: Inactivo"
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
     t.index ["area_id"], name: "i_personas_areas_area_id"
     t.index ["persona_id"], name: "i_personas_areas_persona_id"
+    t.index ["rol_id"], name: "index_personas_areas_on_rol_id"
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.string "nombre", limit: 200
-    t.string "descripcion"
-    t.string "codigo_hex"
-    t.integer "user_created_id", precision: 38
-    t.integer "user_updated_id", precision: 38
-    t.string "estado", limit: 10
+  create_table "roles", comment: "Cat??logo de roles", force: :cascade do |t|
+    t.string "nombre", limit: 200, null: false, comment: "Nombre del rol"
+    t.string "descripcion", comment: "Descripci??n general del rol"
+    t.string "codigo_hex", comment: "Color Hexadecimal que identificar?? el rol"
+    t.integer "user_created_id", precision: 38, comment: "Identificador de usuario al registrar en la aplicaci??n web"
+    t.integer "user_updated_id", precision: 38, null: false, comment: "Identificador de usuario al actualizar en la aplicaci??n web"
+    t.string "estado", limit: 10, default: "A", null: false, comment: "Estado del rol: [A]: Activo  [I]: Inactivo"
     t.string "slug"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
     t.index ["slug"], name: "index_roles_on_slug"
   end
 
@@ -295,17 +299,17 @@ ActiveRecord::Schema.define(version: 2024_03_03_040450) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+  create_table "users", comment: "Cat??logo de usuarios", force: :cascade do |t|
+    t.string "email", default: "", null: false, comment: "Corre electronico del usuario"
+    t.string "encrypted_password", default: "", null: false, comment: "Password-Contrase??a encriptada"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at", precision: 6
     t.datetime "remember_created_at", precision: 6
-    t.integer "user_created_id", precision: 38
-    t.integer "user_updated_id", precision: 38
+    t.integer "user_created_id", precision: 38, comment: "Identificador del usuario al registrar en la aplicaci??n web"
+    t.integer "user_updated_id", precision: 38, comment: "Identificador del usuario al actualizar en la aplicaci??n web"
     t.string "estado", default: "A", comment: "Estado del user: [A]: Activo;  [I]: Inactivo"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", precision: 6, null: false, comment: "Fecha y hora al registrar datos"
+    t.datetime "updated_at", precision: 6, null: false, comment: "Fecha y hora al actualizar datos"
     t.integer "sign_in_count", precision: 38, default: 0, null: false
     t.datetime "current_sign_in_at", precision: 6
     t.datetime "last_sign_in_at", precision: 6
@@ -323,23 +327,27 @@ ActiveRecord::Schema.define(version: 2024_03_03_040450) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "areas", "empresas"
-  add_foreign_key "menu_roles", "opciones"
-  add_foreign_key "menu_roles", "roles"
-  add_foreign_key "opcion_cas", "atributos"
-  add_foreign_key "opcion_cas", "componentes"
-  add_foreign_key "opcion_cas", "opciones"
-  add_foreign_key "opciones", "menus"
-  add_foreign_key "parametros", "users"
-  add_foreign_key "persona_empresa_formularios", "opcion_cas"
-  add_foreign_key "persona_empresa_formularios", "personas_areas"
-  add_foreign_key "personas", "users"
-  add_foreign_key "personas_areas", "areas"
-  add_foreign_key "personas_areas", "personas"
+  add_foreign_key "areas", "empresas", name: "fk_area_empresa"
+  add_foreign_key "menu_roles", "menus", name: "fk_menurol_menu"
+  add_foreign_key "menu_roles", "opciones", name: "fk_menurol_opcion"
+  add_foreign_key "menu_roles", "roles", name: "fk_menurol_rol"
+  add_foreign_key "opcion_cas", "atributos", name: "fk_opcionca_atributo"
+  add_foreign_key "opcion_cas", "componentes", name: "fk_opcionca_componente"
+  add_foreign_key "opcion_cas", "opciones", name: "fk_opcionca_opcion"
+  add_foreign_key "opciones", "menus", name: "fk_opcion_menu"
+  add_foreign_key "parametros", "areas", name: "fk_parametro_area"
+  add_foreign_key "parametros", "empresas", name: "fk_parametro_empresa"
+  add_foreign_key "parametros", "users", name: "fk_parametro_user"
+  add_foreign_key "persona_empresa_formularios", "opcion_cas", name: "fk_peform_opcionca"
+  add_foreign_key "persona_empresa_formularios", "personas_areas", name: "fk_peform_personarea"
+  add_foreign_key "personas", "users", name: "fk_persona_user"
+  add_foreign_key "personas_areas", "areas", name: "fk_personarea_area"
+  add_foreign_key "personas_areas", "personas", name: "fk_personarea_persona"
+  add_foreign_key "personas_areas", "roles", name: "fk_personarea_rol"
 
   create_view "areas_views", sql_definition: <<-SQL
       select 
-  areas."ID",areas."CODIGO_AREA",areas."NOMBRE",areas."CODIGO_HEX",areas."DESCRIPCION",areas."USER_CREATED_ID",areas."USER_UPDATED_ID",areas."ESTADO",areas."EMPRESA_ID",areas."CREATED_AT",areas."UPDATED_AT", 
+  areas."ID",areas."EMPRESA_ID",areas."CODIGO_AREA",areas."NOMBRE",areas."DESCRIPCION",areas."CODIGO_HEX",areas."USER_CREATED_ID",areas."USER_UPDATED_ID",areas."ESTADO",areas."CREATED_AT",areas."UPDATED_AT", 
   empresas.codigo_empresa, 
   empresas.nombre as nombre_empresa, 
   (empresas.codigo_empresa||': '||empresas.nombre) as codigo_nombre_empresa, 
@@ -347,8 +355,16 @@ ActiveRecord::Schema.define(version: 2024_03_03_040450) do
   from areas
   inner join empresas on(areas.empresa_id=empresas.id)
   SQL
+  create_view "opciones_views", sql_definition: <<-SQL
+      select opciones."ID",opciones."MENU_ID",opciones."NOMBRE",opciones."DESCRIPCION",opciones."ICONO",opciones."PATH",opciones."CONTROLADOR",opciones."CODIGO_HEX",opciones."USER_CREATED_ID",opciones."USER_UPDATED_ID",opciones."ESTADO",opciones."APLICA_CARGA_MASIVA",opciones."POSICION",opciones."CREATED_AT",opciones."UPDATED_AT",
+  menus.nombre as nombre_menu, 
+  menus.icono as icono_menu, 
+  menus.codigo_hex as codigo_hex_menu
+  from opciones
+  inner join menus on(opciones.menu_id=menus.id)
+  SQL
   create_view "menu_roles_views", sql_definition: <<-SQL
-      select menu_roles."ID",menu_roles."MENU_ID",menu_roles."DESCRIPCION",menu_roles."USER_CREATED_ID",menu_roles."USER_UPDATED_ID",menu_roles."ESTADO",menu_roles."OPCION_ID",menu_roles."ROL_ID",menu_roles."CREATED_AT",menu_roles."UPDATED_AT",
+      select menu_roles."ID",menu_roles."MENU_ID",menu_roles."OPCION_ID",menu_roles."ROL_ID",menu_roles."DESCRIPCION",menu_roles."USER_CREATED_ID",menu_roles."USER_UPDATED_ID",menu_roles."ESTADO",menu_roles."CREATED_AT",menu_roles."UPDATED_AT",
   opciones.nombre as nombre_opcion, 
   opciones.icono as icono_opcion, 
   opciones.path as path_opcion, 
@@ -365,16 +381,8 @@ ActiveRecord::Schema.define(version: 2024_03_03_040450) do
   inner join roles on(menu_roles.rol_id=roles.id)
   inner join menus on(opciones.menu_id=menus.id)
   SQL
-  create_view "opciones_views", sql_definition: <<-SQL
-      select opciones."ID",opciones."NOMBRE",opciones."DESCRIPCION",opciones."ICONO",opciones."PATH",opciones."CONTROLADOR",opciones."CODIGO_HEX",opciones."USER_CREATED_ID",opciones."USER_UPDATED_ID",opciones."ESTADO",opciones."APLICA_CARGA_MASIVA",opciones."MENU_ID",opciones."POSICION",opciones."CREATED_AT",opciones."UPDATED_AT",
-  menus.nombre as nombre_menu, 
-  menus.icono as icono_menu, 
-  menus.codigo_hex as codigo_hex_menu
-  from opciones
-  inner join menus on(opciones.menu_id=menus.id)
-  SQL
   create_view "opcion_cas_views", sql_definition: <<-SQL
-      select opcion_cas."ID",opcion_cas."DESCRIPCION",opcion_cas."USER_CREATED_ID",opcion_cas."USER_UPDATED_ID",opcion_cas."ESTADO",opcion_cas."OPCION_ID",opcion_cas."COMPONENTE_ID",opcion_cas."ATRIBUTO_ID",opcion_cas."CREATED_AT",opcion_cas."UPDATED_AT",
+      select opcion_cas."ID",opcion_cas."OPCION_ID",opcion_cas."COMPONENTE_ID",opcion_cas."ATRIBUTO_ID",opcion_cas."DESCRIPCION",opcion_cas."USER_CREATED_ID",opcion_cas."USER_UPDATED_ID",opcion_cas."ESTADO",opcion_cas."CREATED_AT",opcion_cas."UPDATED_AT",
   opciones.menu_id, 
   menus.nombre as nombre_menu, 
   menus.icono as icono_menu, 
@@ -393,7 +401,7 @@ ActiveRecord::Schema.define(version: 2024_03_03_040450) do
   inner join menus on(opciones.menu_id=menus.id)
   SQL
   create_view "personas_areas_views", sql_definition: <<-SQL
-      select personas_areas."ID",personas_areas."DESCRIPCION",personas_areas."USER_CREATED_ID",personas_areas."USER_UPDATED_ID",personas_areas."ESTADO",personas_areas."ROL_ID",personas_areas."PERSONA_ID",personas_areas."AREA_ID",personas_areas."CREATED_AT",personas_areas."UPDATED_AT",
+      select personas_areas."ID",personas_areas."PERSONA_ID",personas_areas."AREA_ID",personas_areas."ROL_ID",personas_areas."DESCRIPCION",personas_areas."USER_CREATED_ID",personas_areas."USER_UPDATED_ID",personas_areas."ESTADO",personas_areas."CREATED_AT",personas_areas."UPDATED_AT",
   (personas.nombre||' '||personas.apellido) as nombre_usuario, 
   personas.telefono as telefono_usuario, 
   personas.user_id, 
