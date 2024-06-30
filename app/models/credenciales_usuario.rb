@@ -2,18 +2,18 @@
 #
 # Table name: credenciales_usuarios
 #
-#  id                    :bigint           not null, primary key
-#  actualizo_password    :string
-#  correo_electronico    :string
-#  enviar_correo         :string
-#  enviar_telegram       :string
+#  id                    :integer          not null, primary key
+#  actualizo_password    :string(255)
+#  correo_electronico    :string(255)
+#  enviar_correo         :string(255)
+#  enviar_telegram       :string(255)
 #  estado                :string(10)
-#  estado_envio_correo   :string
-#  estado_envio_telegram :string
-#  nombre_area           :string
-#  nombre_empresa        :string
-#  nombre_usuario        :string
-#  password_temporal     :string
+#  estado_envio_correo   :string(255)
+#  estado_envio_telegram :string(255)
+#  nombre_area           :string(255)
+#  nombre_empresa        :string(255)
+#  nombre_usuario        :string(255)
+#  password_temporal     :string(255)
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  area_id               :integer

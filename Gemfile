@@ -7,7 +7,13 @@ ruby '2.7.2'
 gem 'rails', '~> 6.0.6'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '>= 0.18', '< 2.0'
+# gem 'pg', '>= 0.18', '< 2.0'
+
+# Use oracle as the database for Active Record
+gem "ruby-oci8"
+gem "ruby-plsql"
+gem "scenic-oracle_adapter"
+gem 'activerecord-oracle_enhanced-adapter'
 
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
@@ -107,7 +113,7 @@ gem "stimulus_reflex", "~> 3.4"
 gem 'ajax-datatables-rails'
 
 # Para generación de vistas de base de datos, Enlace: https://github.com/scenic-views/scenic
-gem 'scenic'
+# gem 'scenic'
 
 # GEMAS PARA GENERACION DE EXCELES
 gem 'caxlsx'

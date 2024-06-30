@@ -2,7 +2,7 @@
 #
 # Table name: codigo_colores
 #
-#  id              :bigint           not null, primary key
+#  id              :integer          not null, primary key
 #  codigo_hex      :string(25)
 #  codigo_hls      :string(50)
 #  codigo_rgb      :string(50)

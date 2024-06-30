@@ -1,4 +1,5 @@
-select persona_empresa_formularios.id,
+select 
+persona_empresa_formularios.id,
 persona_empresa_formularios.personas_area_id,
 persona_empresa_formularios.opcion_ca_id,
 persona_empresa_formularios.descripcion,
@@ -31,4 +32,4 @@ opcion_cas_views.atributo_id,
 opcion_cas_views.nombre_atributo
 from persona_empresa_formularios
 inner join personas_areas_views on(persona_empresa_formularios.personas_area_id=personas_areas_views.id)
-inner join opcion_cas_views on(persona_empresa_formularios.opcion_ca_id=opcion_cas_views.id);
+inner join opcion_cas_views on(persona_empresa_formularios.opcion_ca_id=opcion_cas_views.id)

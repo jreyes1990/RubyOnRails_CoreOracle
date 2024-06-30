@@ -2,10 +2,10 @@
 #
 # Table name: personas
 #
-#  id               :bigint           not null, primary key
+#  id               :integer          not null, primary key
 #  apellido         :string(200)
 #  chat_id_telegram :integer
-#  direccion        :string
+#  direccion        :string(255)
 #  estado           :string(10)
 #  foto             :text
 #  nombre           :string(200)
@@ -14,7 +14,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  user_created_id  :integer
-#  user_id          :bigint           not null
+#  user_id          :integer          not null
 #  user_updated_id  :integer
 #
 # Indexes

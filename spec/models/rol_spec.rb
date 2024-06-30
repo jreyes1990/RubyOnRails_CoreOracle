@@ -2,12 +2,12 @@
 #
 # Table name: roles
 #
-#  id              :bigint           not null, primary key
-#  codigo_hex      :string
-#  descripcion     :string
+#  id              :integer          not null, primary key
+#  codigo_hex      :string(255)
+#  descripcion     :string(255)
 #  estado          :string(10)
 #  nombre          :string(200)
-#  slug            :string
+#  slug            :string(255)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  user_created_id :integer
