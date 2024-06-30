@@ -16,4 +16,4 @@ inner join personas on(personas_areas.persona_id=personas.id)
 inner join users on(personas.user_id=users.id)
 inner join areas on(personas_areas.area_id=areas.id)
 inner join empresas on(areas.empresa_id=empresas.id)
-left join roles on(personas_areas.rol_id=roles.id);
+left join roles on(personas_areas.rol_id=roles.id)

@@ -2,19 +2,19 @@
 #
 # Table name: areas_views
 #
-#  id                    :bigint           primary key
+#  id                    :integer          not null, primary key
 #  codigo_area           :integer
 #  codigo_empresa        :integer
-#  codigo_hex            :string
-#  codigo_hex_empresa    :string
-#  codigo_nombre_empresa :text
-#  descripcion           :string
+#  codigo_hex            :string(255)
+#  codigo_hex_empresa    :string(255)
+#  codigo_nombre_empresa :string(242)
+#  descripcion           :string(255)
 #  estado                :string(10)
 #  nombre                :string(200)
 #  nombre_empresa        :string(200)
-#  created_at            :datetime
-#  updated_at            :datetime
-#  empresa_id            :bigint
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  empresa_id            :integer          not null
 #  user_created_id       :integer
 #  user_updated_id       :integer
 #

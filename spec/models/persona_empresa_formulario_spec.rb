@@ -2,20 +2,20 @@
 #
 # Table name: persona_empresa_formularios
 #
-#  id               :bigint           not null, primary key
-#  descripcion      :string
+#  id               :integer          not null, primary key
+#  descripcion      :string(255)
 #  estado           :string(10)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  opcion_ca_id     :bigint           not null
-#  personas_area_id :bigint           not null
+#  opcion_ca_id     :integer          not null
+#  personas_area_id :integer          not null
 #  user_created_id  :integer
 #  user_updated_id  :integer
 #
 # Indexes
 #
-#  index_persona_empresa_formularios_on_opcion_ca_id      (opcion_ca_id)
-#  index_persona_empresa_formularios_on_personas_area_id  (personas_area_id)
+#  i_per_emp_for_opc_ca_id   (opcion_ca_id)
+#  i_per_emp_for_per_are_id  (personas_area_id)
 #
 # Foreign Keys
 #

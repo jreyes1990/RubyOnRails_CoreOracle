@@ -2,21 +2,21 @@
 #
 # Table name: personas_areas
 #
-#  id              :bigint           not null, primary key
-#  descripcion     :string
+#  id              :integer          not null, primary key
+#  descripcion     :string(255)
 #  estado          :string(10)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  area_id         :bigint           not null
-#  persona_id      :bigint           not null
+#  area_id         :integer          not null
+#  persona_id      :integer          not null
 #  rol_id          :integer
 #  user_created_id :integer
 #  user_updated_id :integer
 #
 # Indexes
 #
-#  index_personas_areas_on_area_id     (area_id)
-#  index_personas_areas_on_persona_id  (persona_id)
+#  i_personas_areas_area_id     (area_id)
+#  i_personas_areas_persona_id  (persona_id)
 #
 # Foreign Keys
 #

@@ -2,14 +2,14 @@
 #
 # Table name: menu_roles
 #
-#  id              :bigint           not null, primary key
-#  descripcion     :string
+#  id              :integer          not null, primary key
+#  descripcion     :string(255)
 #  estado          :string(10)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  menu_id         :integer
-#  opcion_id       :bigint           not null
-#  rol_id          :bigint           not null
+#  opcion_id       :integer          not null
+#  rol_id          :integer          not null
 #  user_created_id :integer
 #  user_updated_id :integer
 #

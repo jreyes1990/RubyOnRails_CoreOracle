@@ -2,15 +2,15 @@
 #
 # Table name: areas
 #
-#  id              :bigint           not null, primary key
+#  id              :integer          not null, primary key
 #  codigo_area     :integer
-#  codigo_hex      :string
-#  descripcion     :string
+#  codigo_hex      :string(255)
+#  descripcion     :string(255)
 #  estado          :string(10)
 #  nombre          :string(200)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  empresa_id      :bigint           not null
+#  empresa_id      :integer          not null
 #  user_created_id :integer
 #  user_updated_id :integer
 #

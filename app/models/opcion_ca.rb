@@ -2,22 +2,22 @@
 #
 # Table name: opcion_cas
 #
-#  id              :bigint           not null, primary key
-#  descripcion     :string
+#  id              :integer          not null, primary key
+#  descripcion     :string(255)
 #  estado          :string(10)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  atributo_id     :bigint           not null
-#  componente_id   :bigint           not null
-#  opcion_id       :bigint           not null
+#  atributo_id     :integer          not null
+#  componente_id   :integer          not null
+#  opcion_id       :integer          not null
 #  user_created_id :integer
 #  user_updated_id :integer
 #
 # Indexes
 #
-#  index_opcion_cas_on_atributo_id    (atributo_id)
-#  index_opcion_cas_on_componente_id  (componente_id)
-#  index_opcion_cas_on_opcion_id      (opcion_id)
+#  i_opcion_cas_atributo_id       (atributo_id)
+#  i_opcion_cas_componente_id     (componente_id)
+#  index_opcion_cas_on_opcion_id  (opcion_id)
 #
 # Foreign Keys
 #

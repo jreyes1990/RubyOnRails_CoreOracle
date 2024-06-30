@@ -34,13 +34,13 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
 
       t.integer :user_created_id
       t.integer :user_updated_id
-      t.string :estado
+      t.string :estado, default: "A", comment: "Estado del user: [A]: Activo;  [I]: Inactivo"
 
       t.timestamps null: false
     end
 
-    add_index :users, :email,                unique: true
-    add_index :users, :reset_password_token, unique: true
+    add_index :users, :email,                unique: true, name: "uidx_email"
+    add_index :users, :reset_password_token, unique: true, name: "uidx_resetPassToken"
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
   end

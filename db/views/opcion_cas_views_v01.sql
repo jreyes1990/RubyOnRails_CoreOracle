@@ -14,4 +14,4 @@ from opcion_cas
 inner join opciones on(opcion_cas.opcion_id=opciones.id)
 inner join componentes on(opcion_cas.componente_id=componentes.id)
 inner join atributos on(opcion_cas.atributo_id=atributos.id)
-inner join menus on(opciones.menu_id=menus.id);
+inner join menus on(opciones.menu_id=menus.id)

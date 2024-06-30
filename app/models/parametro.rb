@@ -2,16 +2,16 @@
 #
 # Table name: parametros
 #
-#  id                  :bigint           not null, primary key
-#  nombre_area         :string
-#  nombre_empresa      :string
-#  ruta_predeterminada :string
-#  view_default        :string
+#  id                  :integer          not null, primary key
+#  nombre_area         :string(255)
+#  nombre_empresa      :string(255)
+#  ruta_predeterminada :string(255)
+#  view_default        :string(255)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  area_id             :integer
 #  empresa_id          :integer
-#  user_id             :bigint           not null
+#  user_id             :integer          not null
 #
 # Indexes
 #

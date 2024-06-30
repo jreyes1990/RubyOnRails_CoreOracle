@@ -2,9 +2,9 @@
 #
 # Table name: menus
 #
-#  id              :bigint           not null, primary key
-#  codigo_hex      :string
-#  descripcion     :string
+#  id              :integer          not null, primary key
+#  codigo_hex      :string(255)
+#  descripcion     :string(255)
 #  estado          :string(10)
 #  icono           :string(50)
 #  nombre          :string(200)
