@@ -4,9 +4,9 @@ class CreateMenus < ActiveRecord::Migration[6.0]
       t.string :nombre, limit: 200, null: false, comment: "Nombre del menú"
       t.string :descripcion, null: true, comment: "Descripción general del menú"
       t.string :icono, limit: 50, null: false, comment: "Identificador de icono para el menú"
-      t.string :codigo_hex, null: false, comment: "Identificador de color, codigo hexadecimal para el menú"
-      t.integer :user_created_id, null: true, comment: "Identificador de usuario al registrar en la aplicación web"
-      t.integer :user_updated_id, null: false, comment: "Identificador de usuario al actualizar en la aplicación web"
+      t.string :codigo_hex, null: true, default: "#232323", comment: "Identificador de color, codigo hexadecimal para el menú"
+      t.integer :user_created_id, null: false, comment: "Identificador de usuario al registrar en la aplicación web"
+      t.integer :user_updated_id, null: true, comment: "Identificador de usuario al actualizar en la aplicación web"
       t.string :estado, limit: 10, null: false, default: "A", comment: "Estado del menú: [A]: Activo  [I]: Inactivo"
 
       t.timestamps

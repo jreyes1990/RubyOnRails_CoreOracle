@@ -25,90 +25,161 @@ personas.each do |persona_params|
 
   if persona.persisted?  # Verifica si la persona ya existe en la base de datos
     persona.update!(persona_params)
-    puts "Persona #{persona.nombre}-#{persona.apellido} actualizada"
+    puts "Persona #{persona.nombre} #{persona.apellido} actualizada"
   else
     persona.assign_attributes(persona_params)
     persona.save!
-    puts "Persona #{persona.nombre}-#{persona.apellido} creada"
+    puts "Persona #{persona.nombre} #{persona.apellido} creada"
   end
 end
 
-# Empresa.create!([
-#   {codigo_empresa: 2, nombre: "Ingenio Madre Tierra", descripcion: "Empresa productora de azúcar y sus derivados", estado: "A", user_created_id: nil, user_updated_id: nil}
-# ])
+empresas = [
+  { codigo_empresa: 2, nombre: "Ingenio Madre Tierra", descripcion: "Empresa productora de azucar y sus derivados", codigo_hex: "#232323", estado: "A", user_created_id: 1, user_updated_id: nil }
+]
 
-# Area.create!([
-#   {codigo_area: 9, nombre: "Informatica", descripcion: "Departamento de Tecnologia e Información de la empresa Ingenio Madre Tierra.", empresa_id: 1, estado: "A", user_created_id: nil, user_updated_id:nil}
-# ])
+empresas.each do |empresa_params|
+  empresa = Empresa.find_or_initialize_by(codigo_empresa: empresa_params[:codigo_empresa])
 
-# Rol.create!([
-#   {nombre: "SUPER ADMINISTRADOR", descripcion: "Rol para administrar el sistema", estado: "A", user_created_id: 1, user_updated_id: 1}
-# ])
+  if empresa.persisted?  # Verifica si la empresa ya existe en la base de datos
+    empresa.update!(empresa_params)
+    puts "Empresa '#{empresa_params[:nombre]}' actualizada"
+  else
+    empresa.assign_attributes(empresa_params)
+    empresa.save!
+    puts "Empresa '#{empresa_params[:nombre]}' creada"
+  end
+end
 
-# PersonasArea.create!([
-#   {persona_id: 1, area_id: 1, estado: "A", user_created_id: 1, rol_id: 1, user_updated_id: nil}
-# ])
+areas = [
+  { empresa_id: 1, codigo_area: 9, nombre: "Informatica", descripcion: "Departamento de Tecnologia e Informacion de la empresa Ingenio Madre Tierra.", codigo_hex: "#232323", estado: "A", user_created_id: 1, user_updated_id: nil }
+]
 
-# Atributo.create!([
-#   {nombre: "VER", descripcion: "Atributo que nos brinda la opción de ver.", estado: "A", user_created_id: 1, user_updated_id: 1},
-#   {nombre: "ACCESAR", descripcion: "Atributo que nos brinda el permiso de acceso a partes del sistema", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "VER OPCION", descripcion: "Atributo que nos brinda la opción de ver una opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: 1}
-# ])
+areas.each do |area_params|
+  area = Area.find_or_initialize_by(codigo_area: area_params[:codigo_area], empresa_id: area_params[:empresa_id])
 
-# # atributos = [
-# #   { nombre: "VER", descripcion: "Atributo que nos brinda la opción de ver.", estado: "A", user_created_id: 1, user_updated_id: 1 },
-# #   { nombre: "ACCESAR", descripcion: "Atributo que nos brinda el permiso de acceso a partes del sistema", estado: "A", user_created_id: 1, user_updated_id: nil },
-# #   { nombre: "VER OPCION", descripcion: "Atributo que nos brinda la opción de ver una opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: 1 }
-# # ]
+  if area.persisted?  # Verifica si el área ya existe en la base de datos
+    area.update!(area_params)
+    puts "Área '#{area_params[:nombre]} ' actualizada"
+  else
+    area.assign_attributes(area_params)
+    area.save!(validate: false)
+    puts "Área '#{area_params[:nombre]}' creada"
+  end
+end
 
-# # atributos.each do |atributo_params|
-# #   atributo = Atributo.find_or_initialize_by(nombre: atributo_params[:nombre])
+roles = [
+  { nombre: "SUPER ADMINISTRADOR", descripcion: "Rol para administrar todo el sistema", codigo_hex: "#232323", estado: "A", user_created_id: 1, user_updated_id: nil }
+]
 
-# #   if atributo.persisted?  # Verifica si el atributo ya existe en la base de datos
-# #     atributo.update!(atributo_params)
-# #     puts "Atributo '#{atributo_params[:nombre]}' actualizado"
-# #   else
-# #     atributo.assign_attributes(atributo_params)
-# #     atributo.save!
-# #     puts "Atributo '#{atributo_params[:nombre]}' creado"
-# #   end
-# # end
+roles.each do |rol_params|
+  rol = Rol.find_or_initialize_by(nombre: rol_params[:nombre])
+
+  if rol.persisted?  # Verifica si el rol ya existe en la base de datos
+    rol.update!(rol_params)
+    puts "Rol '#{rol_params[:nombre]}' actualizado"
+  else
+    rol.assign_attributes(rol_params)
+    rol.save!(validate: false)
+    puts "Rol '#{rol_params[:nombre]}' creado"
+  end
+end
 
 
-# Componente.create!([
-#   {nombre: "OPCION", descripcion: "Componente para la validación de permisos a nivel de opciones del sistema.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "BOTON NUEVO REGISTRO", descripcion: "Botón para agregar un nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "BOTON REGISTRAR", descripcion: "Botón para agregar un nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "BOTON EDITAR REGISTRO", descripcion: "Botón para editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "BOTON ELIMINAR REGISTRO", descripcion: "Botón para la eliminar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "BOTON ACTIVAR/INACTIVAR", descripcion: "Botón para activar o inactivar un dato.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "BOTON MODAL REGISTRO", descripcion: "Botón para registrar desde un modal.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "BOTON MODULO CARGA MASIVA", descripcion: "Botón para acceder al modulo de la importacion de datos desde excel.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "BOTON DESCARGA", descripcion: "Botón para la descarga de el formato.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "BOTON CARGA MASIVA", descripcion: "Botón para la importacion de datos desde un archivo.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: 'BOTON ENLACE MODULO', descripcion: 'Boton para acceder a los modulos.', user_created_id: 1, user_updated_id: nil, estado: 'A' },
-#   {nombre: 'BOTON ENLACE DETALLE MODULO', descripcion: 'Boton para acceder al detalle de los modulos.', user_created_id: 1, user_updated_id: nil, estado: 'A' },
-#   {nombre: 'BOTON GENERA REPORTE', descripcion: 'Boton para generar los reportes.', user_created_id: 1, user_updated_id: nil, estado: 'A' },
-#   {nombre: 'BOTON FILTRO', descripcion: 'Boton para filtrar parametros de consulta.', user_created_id: 1, user_updated_id: nil, estado: 'A' },
-#   {nombre: "MENU USUARIOS", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "MENU EMPRESAS", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "MENU AREAS EMPRESA", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "MENU USUARIO AREA", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "MENU ROL", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "MENU MENU", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "MENU OPCION MENU", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "MENU MENU ROL", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "MENU ATRIBUTO", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "MENU COMPONENTE", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "MENU PERMISOS FORMULARIO", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "MENU PERMISOS USUARIO", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil}
-# ])
+personas_areas = [
+  { persona_id: 1, area_id: 1, rol_id: 1, user_created_id: 1, user_updated_id: nil, estado: "A" }
+]
 
-# Menu.create!([
-#   {nombre: "Configuración", descripcion: "Menú padre que contendrá las configuraciones del sistema.", icono: "fas fa-fw fa-wrench", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {nombre: "Catálogos", descripcion: "Menú padre que tendrá las opciones de los catálogos existentes", icono: "fas fa-fw fa-cog", estado: "A", user_created_id: 1, user_updated_id: nil}
-# ])
+personas_areas.each do |pa_params|
+  personas_area = PersonasArea.find_or_initialize_by(persona_id: pa_params[:persona_id], area_id: pa_params[:area_id])
 
+  if personas_area.persisted?  # Verifica si el registro ya existe en la base de datos
+    personas_area.update!(pa_params)
+    puts "Relación Persona-Area para Persona ID '#{pa_params[:persona_id]}' y Área ID '#{pa_params[:area_id]}' actualizada"
+  else
+    personas_area.assign_attributes(pa_params)
+    personas_area.save!
+    puts "Relación Persona-Area para Persona ID '#{pa_params[:persona_id]}' y Área ID '#{pa_params[:area_id]}' creada"
+  end
+end
+
+atributos = [
+  { nombre: "VER", descripcion: "Atributo que nos brinda la opción de ver.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "ACCESAR", descripcion: "Atributo que nos brinda el permiso de acceso a partes del sistema", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "VER OPCION", descripcion: "Atributo que nos brinda la opción de ver una opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil }
+]
+
+atributos.each do |atributo_params|
+  atributo = Atributo.find_or_initialize_by(nombre: atributo_params[:nombre])
+
+  if atributo.persisted?  # Verifica si el atributo ya existe en la base de datos
+    atributo.update!(atributo_params)
+    puts "Atributo '#{atributo_params[:nombre]}' actualizado"
+  else
+    atributo.assign_attributes(atributo_params)
+    atributo.save!
+    puts "Atributo '#{atributo_params[:nombre]}' creado"
+  end
+end
+
+componentes = [
+  { nombre: "OPCION", descripcion: "Componente para la validación de permisos a nivel de opciones del sistema.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "BOTON NUEVO REGISTRO", descripcion: "Botón para agregar un nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "BOTON REGISTRAR", descripcion: "Botón para agregar un nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "BOTON EDITAR REGISTRO", descripcion: "Botón para editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "BOTON ELIMINAR REGISTRO", descripcion: "Botón para la eliminar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "BOTON ACTIVAR/INACTIVAR", descripcion: "Botón para activar o inactivar un dato.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "BOTON MODAL REGISTRO", descripcion: "Botón para registrar desde un modal.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "BOTON MODULO CARGA MASIVA", descripcion: "Botón para acceder al modulo de la importacion de datos desde excel.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "BOTON DESCARGA", descripcion: "Botón para la descarga de el formato.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "BOTON CARGA MASIVA", descripcion: "Botón para la importacion de datos desde un archivo.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: 'BOTON ENLACE MODULO', descripcion: 'Boton para acceder a los modulos.', user_created_id: 1, user_updated_id: nil, estado: 'A' },
+  { nombre: 'BOTON ENLACE DETALLE MODULO', descripcion: 'Boton para acceder al detalle de los modulos.', user_created_id: 1, user_updated_id: nil, estado: 'A' },
+  { nombre: 'BOTON GENERA REPORTE', descripcion: 'Boton para generar los reportes.', user_created_id: 1, user_updated_id: nil, estado: 'A' },
+  { nombre: 'BOTON FILTRO', descripcion: 'Boton para filtrar parametros de consulta.', user_created_id: 1, user_updated_id: nil, estado: 'A' },
+  { nombre: "MENU USUARIOS", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "MENU EMPRESAS", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "MENU AREAS EMPRESA", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "MENU USUARIO AREA", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "MENU ROL", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "MENU MENU", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "MENU OPCION MENU", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "MENU MENU ROL", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "MENU ATRIBUTO", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "MENU COMPONENTE", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "MENU PERMISOS FORMULARIO", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "MENU PERMISOS USUARIO", descripcion: "Validación del Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil }
+]
+
+componentes.each do |componente_params|
+  componente = Componente.find_or_initialize_by(nombre: componente_params[:nombre])
+
+  if componente.persisted?  # Verifica si el componente ya existe en la base de datos
+    componente.update!(componente_params)
+    puts "Componente '#{componente_params[:nombre]}' actualizado"
+  else
+    componente.assign_attributes(componente_params)
+    componente.save!
+    puts "Componente '#{componente_params[:nombre]}' creado"
+  end
+end
+
+menus = [
+  { nombre: "Configuración", descripcion: "Menú padre que contendrá las configuraciones del sistema.", icono: "fas fa-fw fa-wrench", estado: "A", user_created_id: 1, user_updated_id: nil },
+  { nombre: "Catálogos", descripcion: "Menú padre que tendrá las opciones de los catálogos existentes", icono: "fas fa-fw fa-cog", estado: "A", user_created_id: 1, user_updated_id: nil }
+]
+
+menus.each do |menu_params|
+  menu = Menu.find_or_initialize_by(nombre: menu_params[:nombre])
+
+  if menu.persisted?  # Verifica si el menú ya existe en la base de datos
+    menu.update!(menu_params)
+    puts "Menú '#{menu_params[:nombre]}' actualizado"
+  else
+    menu.assign_attributes(menu_params)
+    menu.save!
+    puts "Menú '#{menu_params[:nombre]}' creado"
+  end
+end
 
 # Opcion.create!([
 #   {nombre: "Usuario", descripcion: "Opción del menú para la administración de los usuarios del sistema.", icono: "fas fa-users", path: "usuarios_path", controlador: "usuarios", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},

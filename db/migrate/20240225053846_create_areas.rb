@@ -5,9 +5,9 @@ class CreateAreas < ActiveRecord::Migration[6.0]
       t.integer :codigo_area, comment: "Identificador del código del área"
       t.string :nombre, limit: 200, comment: "Nombre del área"
       t.string :descripcion, comment: "Descripción general del área"
-      t.string :codigo_hex, comment: "Identificador del color codigo hexadecimal para el área"
-      t.integer :user_created_id, null: true, comment: "Identificador de usuario al registrar en la aplicación web"
-      t.integer :user_updated_id, null: false, comment: "Identificador de usuario al actualizar en la aplicación web"
+      t.string :codigo_hex, null: true, default: "#232323", comment: "Identificador del color codigo hexadecimal para el área"
+      t.integer :user_created_id, null: false, comment: "Identificador de usuario al registrar en la aplicación web"
+      t.integer :user_updated_id, null: true, comment: "Identificador de usuario al actualizar en la aplicación web"
       t.string :estado, limit: 10, null: false, default: "A", comment: "Estado del área: [A]: Activo  [I]: Inactivo"
 
       t.timestamps
