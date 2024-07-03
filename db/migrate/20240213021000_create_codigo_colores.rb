@@ -7,8 +7,8 @@ class CreateCodigoColores < ActiveRecord::Migration[6.0]
       t.string :codigo_hex, limit: 25, comment: "Identificador del color, codigo hexadecimal"
       t.string :codigo_rgb, limit: 50, comment: "Identificador del color, codigo RGB"
       t.string :codigo_hls, limit: 50, comment: "Identificador del color, codigo HLS"
-      t.integer :user_created_id, null: true, comment: "Identificador de usuario al registrar en la aplicación web"
-      t.integer :user_updated_id, null: false, comment: "Identificador de usuario al actualizar en la aplicación web"
+      t.integer :user_created_id, null: false, comment: "Identificador de usuario al registrar en la aplicación web"
+      t.integer :user_updated_id, null: true, comment: "Identificador de usuario al actualizar en la aplicación web"
       t.string :estado, limit: 10, null: false, default: "A", comment: "Estado de codigo de colores: [A]: Activo  [I]: Inactivo"
 
       t.timestamps

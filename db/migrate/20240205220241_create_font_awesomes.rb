@@ -6,8 +6,8 @@ class CreateFontAwesomes < ActiveRecord::Migration[6.0]
       t.string :termino
       t.string :codigo_css, limit: 25, comment: "Identificador codigo CSS del icono"
       t.string :tipo_icono, limit: 50
-      t.integer :user_created_id, null: true, comment: "Identificador de usuario al registrar en la aplicación web"
-      t.integer :user_updated_id, null: false, comment: "Identificador de usuario al actualizar en la aplicación web"
+      t.integer :user_created_id, null: false, comment: "Identificador de usuario al registrar en la aplicación web"
+      t.integer :user_updated_id, null: true, comment: "Identificador de usuario al actualizar en la aplicación web"
       t.string :estado, limit: 10, null: false, default: "A", comment: "Estado del FontAwesome: [A]: Activo  [I]: Inactivo"
 
       t.timestamps

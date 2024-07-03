@@ -1,6 +1,6 @@
 
 usuarios = [
-  { email: "jreyes1990.test@gmail.com",  encrypted_password: "$2a$12$XM9n0jp/ut8OJ5fD5Gamo.4o/OMc4UgKYrq7EQ.3hLGxSpb2P/cqW", reset_password_token: "2d26e6612f4eaecec1c0baa7f7a4a71801ffb12d64b864aff3173a4eea0896aa", reset_password_sent_at: "2021-11-11 22:48:09", remember_created_at: nil, estado: "A", user_created_id: nil, user_updated_id: nil }
+  { email: "jreyes1990.test@gmail.com",  encrypted_password: "$2a$12$XM9n0jp/ut8OJ5fD5Gamo.4o/OMc4UgKYrq7EQ.3hLGxSpb2P/cqW", reset_password_token: "2d26e6612f4eaecec1c0baa7f7a4a71801ffb12d64b864aff3173a4eea0896aa", reset_password_sent_at: "2021-11-11 22:48:09", remember_created_at: nil, estado: "A", user_created_id: 1, user_updated_id: nil }
 ]
 
 usuarios.each do |user_params|
@@ -181,179 +181,319 @@ menus.each do |menu_params|
   end
 end
 
-# Opcion.create!([
-#   {nombre: "Usuario", descripcion: "Opción del menú para la administración de los usuarios del sistema.", icono: "fas fa-users", path: "usuarios_path", controlador: "usuarios", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
-#   {nombre: "Empresas", descripcion: "Opción del menú para la administración de las empresas del sistema.", icono: "fas fa-building", path: "empresas_path", controlador: "empresas", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
-#   {nombre: "Área - Empresa", descripcion: "Opción del menú para la administración de las áreas por empresa del sistema.", icono: "fas fa-sitemap", path: "areas_path", controlador: "areas", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
-#   {nombre: "Usuario - Área", descripcion: "Opción del menú para la administración de las asignaciones del los usuarios a areas del sistema.", icono: "fas fa-users", path: "personas_areas_path", controlador: "personas_areas", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
-#   {nombre: "Rol", descripcion: "Opción del menú para la administración de los roles del sistema.", icono: "fas fa-user-tag", path: "roles_path", controlador: "roles", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
-#   {nombre: "Menú", descripcion: "Opción del menú para la administración de los menús del sistema.", icono: "fab fa-elementor", path: "menus_path", controlador: "menus", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
-#   {nombre: "Opción - Menú", descripcion: "Opción del menú para la administración de las opciones por menú del sistema.", icono: "fas fa-minus-square", path: "opciones_path", controlador: "opciones", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
-#   {nombre: "Menú - Rol", descripcion: "Opción del menú para la administración de los menús por rol del sistema.", icono: "fas fa-user-cog", path: "menu_roles_path", controlador: "menu_roles", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
-#   {nombre: "Atributo", descripcion: "Opción del menú para la administración de los atributos del sistema.", icono: "fas fa-atom", path: "atributos_path", controlador: "atributos", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
-#   {nombre: "Componente", descripcion: "Opción del menú para la administración de los componentes del sistema.", icono: "fab fa-codepen", path: "componentes_path", controlador: "componentes", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
-#   {nombre: "Permisos Formulario", descripcion: "Opción del menú para la administración de los permisos por formulario del sistema.", icono: "fas fa-clipboard-list", path: "opcion_cas_path", controlador: "opcion_cas", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
-#   {nombre: "Permisos Usuario", descripcion: "Opción del menú para la administración de los permisos por usuario del sistema.", icono: "fas fa-clipboard-list", path: "persona_empresa_formularios_path", controlador: "persona_empresa_formularios", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil}
-# ])
+opciones = [
+  {nombre: "Usuario", descripcion: "Opción del menú para la administración de los usuarios del sistema.", icono: "fas fa-users", path: "usuarios_path", controlador: "usuarios", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
+  {nombre: "Empresas", descripcion: "Opción del menú para la administración de las empresas del sistema.", icono: "fas fa-building", path: "empresas_path", controlador: "empresas", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
+  {nombre: "Área - Empresa", descripcion: "Opción del menú para la administración de las áreas por empresa del sistema.", icono: "fas fa-sitemap", path: "areas_path", controlador: "areas", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
+  {nombre: "Usuario - Área", descripcion: "Opción del menú para la administración de las asignaciones del los usuarios a areas del sistema.", icono: "fas fa-users", path: "personas_areas_path", controlador: "personas_areas", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
+  {nombre: "Rol", descripcion: "Opción del menú para la administración de los roles del sistema.", icono: "fas fa-user-tag", path: "roles_path", controlador: "roles", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
+  {nombre: "Menú", descripcion: "Opción del menú para la administración de los menús del sistema.", icono: "fab fa-elementor", path: "menus_path", controlador: "menus", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
+  {nombre: "Opción - Menú", descripcion: "Opción del menú para la administración de las opciones por menú del sistema.", icono: "fas fa-minus-square", path: "opciones_path", controlador: "opciones", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
+  {nombre: "Menú - Rol", descripcion: "Opción del menú para la administración de los menús por rol del sistema.", icono: "fas fa-user-cog", path: "menu_roles_path", controlador: "menu_roles", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
+  {nombre: "Atributo", descripcion: "Opción del menú para la administración de los atributos del sistema.", icono: "fas fa-atom", path: "atributos_path", controlador: "atributos", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
+  {nombre: "Componente", descripcion: "Opción del menú para la administración de los componentes del sistema.", icono: "fab fa-codepen", path: "componentes_path", controlador: "componentes", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
+  {nombre: "Permisos Formulario", descripcion: "Opción del menú para la administración de los permisos por formulario del sistema.", icono: "fas fa-clipboard-list", path: "opcion_cas_path", controlador: "opcion_cas", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil},
+  {nombre: "Permisos Usuario", descripcion: "Opción del menú para la administración de los permisos por usuario del sistema.", icono: "fas fa-clipboard-list", path: "persona_empresa_formularios_path", controlador: "persona_empresa_formularios", estado: "A", menu_id: 1, user_created_id: 1, user_updated_id: nil}
+]
 
-# MenuRol.create!([
-#   {rol_id: 1, opcion_id: 1, menu_id: nil, estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {rol_id: 1, opcion_id: 2, menu_id: nil, estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {rol_id: 1, opcion_id: 3, menu_id: nil, estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {rol_id: 1, opcion_id: 4, menu_id: nil, estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {rol_id: 1, opcion_id: 5, menu_id: nil, estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {rol_id: 1, opcion_id: 6, menu_id: nil, estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {rol_id: 1, opcion_id: 7, menu_id: nil, estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {rol_id: 1, opcion_id: 8, menu_id: nil, estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {rol_id: 1, opcion_id: 9, menu_id: nil, estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {rol_id: 1, opcion_id: 10, menu_id: nil, estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {rol_id: 1, opcion_id: 11, menu_id: nil, estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {rol_id: 1, opcion_id: 12, menu_id: nil, estado: "A", user_created_id: 1, user_updated_id: nil}
-# ])
+opciones.each do |opcion_params|
+  opcion = Opcion.find_or_initialize_by(nombre: opcion_params[:nombre], menu_id: opcion_params[:menu_id])
 
-# OpcionCa.create!([
-#   {opcion_id: 1, componente_id: 15, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 1, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 1, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 1, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 1, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 1, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 1, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 1, componente_id: 7, atributo_id: 1, descripcion: "Permiso del botón registrar desde un modal.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 1, componente_id: 8, atributo_id: 1, descripcion: "Permiso del botón modulo carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 1, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 1, componente_id: 10, atributo_id: 1, descripcion: "Permiso del botón carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  if opcion.persisted?  # Verifica si el menú ya existe en la base de datos
+    opcion.update!(opcion_params)
+    puts "Opción '#{opcion_params[:nombre]}' actualizado"
+  else
+    opcion.assign_attributes(opcion_params)
+    opcion.save!
+    puts "Opción '#{opcion_params[:nombre]}' creado"
+  end
+end
 
-#   {opcion_id: 2, componente_id: 16, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 2, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 2, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 2, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 2, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 2, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 2, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 2, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
+menu_roles = [
+  {rol_id: 1, opcion_id: 1, menu_id: 1, estado: "A", user_created_id: 1, user_updated_id: nil},
+  {rol_id: 1, opcion_id: 2, menu_id: 1, estado: "A", user_created_id: 1, user_updated_id: nil},
+  {rol_id: 1, opcion_id: 3, menu_id: 1, estado: "A", user_created_id: 1, user_updated_id: nil},
+  {rol_id: 1, opcion_id: 4, menu_id: 1, estado: "A", user_created_id: 1, user_updated_id: nil},
+  {rol_id: 1, opcion_id: 5, menu_id: 1, estado: "A", user_created_id: 1, user_updated_id: nil},
+  {rol_id: 1, opcion_id: 6, menu_id: 1, estado: "A", user_created_id: 1, user_updated_id: nil},
+  {rol_id: 1, opcion_id: 7, menu_id: 1, estado: "A", user_created_id: 1, user_updated_id: nil},
+  {rol_id: 1, opcion_id: 8, menu_id: 1, estado: "A", user_created_id: 1, user_updated_id: nil},
+  {rol_id: 1, opcion_id: 9, menu_id: 1, estado: "A", user_created_id: 1, user_updated_id: nil},
+  {rol_id: 1, opcion_id: 10, menu_id: 1, estado: "A", user_created_id: 1, user_updated_id: nil},
+  {rol_id: 1, opcion_id: 11, menu_id: 1, estado: "A", user_created_id: 1, user_updated_id: nil},
+  {rol_id: 1, opcion_id: 12, menu_id: 1, estado: "A", user_created_id: 1, user_updated_id: nil}
+]
 
-#   {opcion_id: 3, componente_id: 17, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 3, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 3, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 3, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 3, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 3, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 3, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 3, componente_id: 7, atributo_id: 1, descripcion: "Permiso del botón registrar desde un modal.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 3, componente_id: 8, atributo_id: 1, descripcion: "Permiso del botón modulo carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 3, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 3, componente_id: 10, atributo_id: 1, descripcion: "Permiso del botón carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
+menu_roles.each do |menurol_params|
+  menu_rol = MenuRol.find_or_initialize_by(menu_id: menurol_params[:menu_id], opcion_id: menurol_params[:opcion_id], rol_id: menurol_params[:rol_id])
 
-#   {opcion_id: 4, componente_id: 18, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 4, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 4, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 4, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 4, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 4, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 4, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 4, componente_id: 7, atributo_id: 1, descripcion: "Permiso del botón registrar desde un modal.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 4, componente_id: 8, atributo_id: 1, descripcion: "Permiso del botón modulo carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 4, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 4, componente_id: 10, atributo_id: 1, descripcion: "Permiso del botón carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  if menu_rol.persisted?  # Verifica si el menú ya existe en la base de datos
+    menu_rol.update!(menurol_params)
+    puts "Menu-Rol '#{menurol_params[:menu_id]}'-'#{menurol_params[:opcion_id]}'-'#{menurol_params[:rol_id]}' actualizado"
+  else
+    menu_rol.assign_attributes(menurol_params)
+    menu_rol.save!
+    puts "Menu-Rol '#{menurol_params[:menu_id]}'-'#{menurol_params[:opcion_id]}'-'#{menurol_params[:rol_id]}' creado"
+  end
+end
 
-#   {opcion_id: 5, componente_id: 19, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 5, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 5, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 5, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 5, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 5, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 5, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 5, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
+opcion_cas = [
+  {opcion_id: 1, componente_id: 15, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 1, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 1, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 1, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 1, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 1, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 1, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 1, componente_id: 7, atributo_id: 1, descripcion: "Permiso del botón registrar desde un modal.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 1, componente_id: 8, atributo_id: 1, descripcion: "Permiso del botón modulo carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 1, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 1, componente_id: 10, atributo_id: 1, descripcion: "Permiso del botón carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
 
-#   {opcion_id: 6, componente_id: 20, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 6, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 6, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 6, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 6, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 6, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 6, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 6, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 2, componente_id: 16, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 2, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 2, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 2, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 2, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 2, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 2, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 2, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
 
-#   {opcion_id: 7, componente_id: 21, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 7, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 7, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 7, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 7, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 7, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 7, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 7, componente_id: 7, atributo_id: 1, descripcion: "Permiso del botón registrar desde un modal.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 7, componente_id: 8, atributo_id: 1, descripcion: "Permiso del botón modulo carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 7, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 7, componente_id: 10, atributo_id: 1, descripcion: "Permiso del botón carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 7, componente_id: 14, atributo_id: 1, descripcion: "Permiso del botón filtro de parametros.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 3, componente_id: 17, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 3, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 3, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 3, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 3, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 3, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 3, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 3, componente_id: 7, atributo_id: 1, descripcion: "Permiso del botón registrar desde un modal.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 3, componente_id: 8, atributo_id: 1, descripcion: "Permiso del botón modulo carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 3, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 3, componente_id: 10, atributo_id: 1, descripcion: "Permiso del botón carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
 
-#   {opcion_id: 8, componente_id: 22, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 8, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 8, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 8, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 8, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 8, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 8, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 8, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 4, componente_id: 18, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 4, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 4, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 4, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 4, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 4, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 4, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 4, componente_id: 7, atributo_id: 1, descripcion: "Permiso del botón registrar desde un modal.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 4, componente_id: 8, atributo_id: 1, descripcion: "Permiso del botón modulo carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 4, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 4, componente_id: 10, atributo_id: 1, descripcion: "Permiso del botón carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
 
-#   {opcion_id: 9, componente_id: 23, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 9, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 9, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 9, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 9, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 9, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 9, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 9, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 5, componente_id: 19, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 5, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 5, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 5, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 5, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 5, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 5, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 5, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
 
-#   {opcion_id: 10, componente_id: 24, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 10, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 10, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 10, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 10, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 10, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 10, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 10, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 6, componente_id: 20, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 6, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 6, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 6, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 6, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 6, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 6, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 6, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
 
-#   {opcion_id: 11, componente_id: 25, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 11, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 11, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 11, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 11, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 11, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 11, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 11, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 7, componente_id: 21, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 7, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 7, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 7, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 7, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 7, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 7, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 7, componente_id: 7, atributo_id: 1, descripcion: "Permiso del botón registrar desde un modal.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 7, componente_id: 8, atributo_id: 1, descripcion: "Permiso del botón modulo carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 7, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 7, componente_id: 10, atributo_id: 1, descripcion: "Permiso del botón carga masiva.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 7, componente_id: 14, atributo_id: 1, descripcion: "Permiso del botón filtro de parametros.", estado: "A", user_created_id: 1, user_updated_id: nil},
 
-#   {opcion_id: 12, componente_id: 26, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 12, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 12, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 12, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 12, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 12, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 12, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
-#   {opcion_id: 12, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil}
-# ])
+  {opcion_id: 8, componente_id: 22, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 8, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 8, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 8, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 8, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 8, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 8, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 8, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
 
-# PersonaEmpresaFormulario.create!([
-#   {personas_area_id: 1, opcion_ca_id: 1, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 2, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 3, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 4, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 5, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 6, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 7, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 8, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 9, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 10, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 11, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 12, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 13, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 14, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 15, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 16, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 17, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 18, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 19, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 20, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil},
-#   {personas_area_id: 1, opcion_ca_id: 21, descripcion: "PERFIL", estado: "A", user_created_id: nil, user_updated_id: nil}
-# ])
+  {opcion_id: 9, componente_id: 23, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 9, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 9, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 9, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 9, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 9, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 9, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 9, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
+
+  {opcion_id: 10, componente_id: 24, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 10, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 10, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 10, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 10, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 10, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 10, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 10, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
+
+  {opcion_id: 11, componente_id: 25, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 11, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 11, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 11, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 11, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 11, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 11, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 11, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil},
+
+  {opcion_id: 12, componente_id: 26, atributo_id: 3, descripcion: "Permiso para ver la opción en el Sidebar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 12, componente_id: 1, atributo_id: 2, descripcion: "Permiso para acceder al modulo.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 12, componente_id: 2, atributo_id: 1, descripcion: "Permiso del botón nuevo registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 12, componente_id: 3, atributo_id: 1, descripcion: "Permiso del botón registrar.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 12, componente_id: 4, atributo_id: 1, descripcion: "Permiso del botón editar un registro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 12, componente_id: 5, atributo_id: 1, descripcion: "Permiso del botón eliminar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 12, componente_id: 6, atributo_id: 1, descripcion: "Permiso del botón activar/inactivar un regitro.", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {opcion_id: 12, componente_id: 9, atributo_id: 1, descripcion: "Permiso del botón descarga.", estado: "A", user_created_id: 1, user_updated_id: nil}
+]
+
+opcion_cas.each do |opcionca_params|
+  opcionca = OpcionCa.find_or_initialize_by(opcion_id: opcionca_params[:opcion_id], componente_id: opcionca_params[:componente_id], atributo_id: opcionca_params[:atributo_id])
+
+  if opcionca.persisted?  # Verifica si el menú ya existe en la base de datos
+    opcionca.update!(opcionca_params)
+    puts "Opcion-Ca '#{opcionca_params[:opcion_id]}'-'#{opcionca_params[:componente_id]}'-'#{opcionca_params[:atributo_id]}' actualizado"
+  else
+    opcionca.assign_attributes(opcionca_params)
+    opcionca.save!
+    puts "Opcion-Ca '#{opcionca_params[:opcion_id]}'-'#{opcionca_params[:componente_id]}'-'#{opcionca_params[:atributo_id]}' creado"
+  end
+end
+
+pers_emp_forms = [
+  {personas_area_id: 1, opcion_ca_id: 1, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 2, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 3, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 4, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 5, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 6, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 7, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 8, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 9, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 10, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 11, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 12, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 13, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 14, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 15, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 16, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 17, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 18, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 19, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 20, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 21, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 22, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 23, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 24, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 25, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 26, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 27, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 28, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 29, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 30, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 31, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 32, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 33, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 34, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 35, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 36, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 37, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 38, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 39, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 40, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 41, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 42, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 43, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 44, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 45, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 46, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 47, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 48, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 49, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 50, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 51, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 52, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 53, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 54, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 55, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 56, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 57, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 58, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 59, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 60, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 61, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 62, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 63, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 64, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 65, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 66, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 67, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 68, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 69, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 70, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 71, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 72, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 73, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 74, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 75, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 76, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 77, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 78, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 79, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 80, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 81, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 82, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 83, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 84, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 85, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 86, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 87, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 88, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 89, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 90, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 91, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 92, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 93, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 94, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 95, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 96, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 97, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 98, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 99, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 100, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 101, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 102, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 103, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 104, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 105, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 106, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 107, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 108, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil},
+  {personas_area_id: 1, opcion_ca_id: 109, descripcion: "PERFIL", estado: "A", user_created_id: 1, user_updated_id: nil}
+]
+
+pers_emp_forms.each do |pers_emp_form_params|
+  pers_emp_form = PersonaEmpresaFormulario.find_or_initialize_by(personas_area_id: pers_emp_form_params[:personas_area_id], opcion_ca_id: pers_emp_form_params[:opcion_ca_id])
+
+  if pers_emp_form.persisted?  # Verifica si el menú ya existe en la base de datos
+    pers_emp_form.update!(pers_emp_form_params)
+    puts "Persona Empresa Formularios '#{pers_emp_form_params[:personas_area_id]}'-'#{pers_emp_form_params[:opcion_ca_id]}' actualizado"
+  else
+    pers_emp_form.assign_attributes(pers_emp_form_params)
+    pers_emp_form.save!
+    puts "Persona Empresa Formularios '#{pers_emp_form_params[:personas_area_id]}'-'#{pers_emp_form_params[:opcion_ca_id]}' creado"
+  end
+end

@@ -35,7 +35,7 @@
 #  user_id            :bigint
 #
 class PersonaEmpresaFormularioView < ApplicationRecord
-  self.table_name = "persona_empresa_formularios_views"
+  self.table_name = "persona_empresa_form_views"
   self.primary_key = :id
 
   def readonly?
