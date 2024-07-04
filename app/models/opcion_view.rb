@@ -5,7 +5,8 @@
 #  id                  :integer          not null, primary key
 #  aplica_carga_masiva :string(10)
 #  codigo_hex          :string(255)
-#  codigo_hex_menu     :string(255)      not null
+#  codigo_hex_menu     :string(255)
+#  componente_sidebar  :string(255)
 #  controlador         :string(300)      not null
 #  descripcion         :string(255)
 #  estado              :string(10)       not null
@@ -15,6 +16,7 @@
 #  nombre_menu         :string(200)      not null
 #  path                :string(255)      not null
 #  posicion            :integer
+#  visible_sidebar     :string(1)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  menu_id             :integer          not null

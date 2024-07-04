@@ -2,16 +2,16 @@
 #
 # Table name: parametros
 #
-#  id(Identificador de la llave primaria)                     :integer          not null, primary key
-#  nombre_area                                                :string(255)
-#  nombre_empresa                                             :string(255)
-#  ruta_predeterminada                                        :string(255)
-#  view_default                                               :string(255)
-#  created_at(Fecha y hora al registrar datos)                :datetime         not null
-#  updated_at(Fecha y hora al actualizar datos)               :datetime         not null
-#  area_id(Identificador del ??rea para el par??metro)        :integer          not null
-#  empresa_id(Identificador de la empresa para el par??metro) :integer          not null
-#  user_id(Identificador del usuario para el par??metro)      :integer          not null
+#  id(Identificador de la llave primaria)                    :integer          not null, primary key
+#  nombre_area                                               :string(255)
+#  nombre_empresa                                            :string(255)
+#  ruta_predeterminada                                       :string(255)
+#  view_default                                              :string(255)
+#  created_at(Fecha y hora al registrar datos)               :datetime         not null
+#  updated_at(Fecha y hora al actualizar datos)              :datetime         not null
+#  area_id(Identificador del área para el parámetro)         :integer          not null
+#  empresa_id(Identificador de la empresa para el parámetro) :integer          not null
+#  user_id(Identificador del usuario para el parámetro)      :integer          not null
 #
 # Indexes
 #

@@ -3,7 +3,7 @@
 # Table name: opcion_cas_views
 #
 #  id                 :integer          not null, primary key
-#  codigo_hex_menu    :string(255)      not null
+#  codigo_hex_menu    :string(255)
 #  codigo_hex_opcion  :string(255)
 #  controlador_opcion :string(300)      not null
 #  descripcion        :string(255)

@@ -7,12 +7,14 @@ class CreateOpciones < ActiveRecord::Migration[6.0]
       t.string :icono, limit: 50, null: true, comment: "Icono que identificará la opción"
       t.string :path, null: false, comment: "Identificador de ruta de navegación"
       t.string :controlador, limit: 300, null: false, comment: "Identificador de controlador de navegación"
-      t.string :codigo_hex, null: true, comment: "Color Hexadecimal que identificará la opción"
+      t.string :codigo_hex, null: true, default: "#232323", comment: "Color Hexadecimal que identificará la opción"
+      t.string :componente_sidebar, null: true, comment: "Identificador el componente a utilizar en el sidebar"
+      t.boolean :visible_sidebar, null: true, default: true, comment: "El componente será visible en el sidebar?"
+      t.integer :posicion, null: true, comment: "Orden del componente a utilizar en el sidebar"
       t.integer :user_created_id, null: false, comment: "Identificador de usuario al registrar en la aplicación web"
       t.integer :user_updated_id, null: true, comment: "Identificador de usuario al actualizar en la aplicación web"
       t.string :estado, limit: 10, null: false, default: "A", comment: "Estado de la opción: [A]: Activo  [I]: Inactivo"
       t.string :aplica_carga_masiva, limit: 10
-      t.integer :posicion, null: true, comment: "Orden que tendra cada opción"
 
       t.timestamps
     end

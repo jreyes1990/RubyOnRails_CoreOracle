@@ -2,21 +2,23 @@
 #
 # Table name: opciones
 #
-#  id(Identificador de la llave primaria)                                        :integer          not null, primary key
-#  aplica_carga_masiva                                                           :string(10)
-#  codigo_hex(Color Hexadecimal que identificar?? la opci??n)                    :string(255)
-#  controlador(Identificador de controlador de navegaci??n)                      :string(300)      not null
-#  descripcion(Descripci??n general de la opci??n)                               :string(255)
-#  estado(Estado de la opci??n: [A]: Activo  [I]: Inactivo)                      :string(10)       default("A"), not null
-#  icono(Icono que identificar?? la opci??n)                                     :string(50)
-#  nombre(Nombre de la opci??n)                                                  :string(200)      not null
-#  path(Identificador de ruta de navegaci??n)                                    :string(255)      not null
-#  posicion(Orden que tendra cada opci??n)                                       :integer
-#  created_at(Fecha y hora al registrar datos)                                   :datetime         not null
-#  updated_at(Fecha y hora al actualizar datos)                                  :datetime         not null
-#  menu_id(Identificador del menu para la opci??n)                               :integer          not null
-#  user_created_id(Identificador de usuario al registrar en la aplicaci??n web)  :integer
-#  user_updated_id(Identificador de usuario al actualizar en la aplicaci??n web) :integer          not null
+#  id(Identificador de la llave primaria)                                       :integer          not null, primary key
+#  aplica_carga_masiva                                                          :string(10)
+#  codigo_hex(Color Hexadecimal que identificará la opción)                     :string(255)
+#  componente_sidebar(Identificador el componente a utilizar en el sidebar)     :string(255)
+#  controlador(Identificador de controlador de navegación)                      :string(300)      not null
+#  descripcion(Descripción general de la opción)                                :string(255)
+#  estado(Estado de la opción: [A]: Activo  [I]: Inactivo)                      :string(10)       default("A"), not null
+#  icono(Icono que identificará la opción)                                      :string(50)
+#  nombre(Nombre de la opción)                                                  :string(200)      not null
+#  path(Identificador de ruta de navegación)                                    :string(255)      not null
+#  posicion(Orden del componente a utilizar en el sidebar)                      :integer
+#  visible_sidebar(El componente será visible en el sidebar?)                   :string(1)        default("t")
+#  created_at(Fecha y hora al registrar datos)                                  :datetime         not null
+#  updated_at(Fecha y hora al actualizar datos)                                 :datetime         not null
+#  menu_id(Identificador del menu para la opción)                               :integer          not null
+#  user_created_id(Identificador de usuario al registrar en la aplicación web)  :integer          not null
+#  user_updated_id(Identificador de usuario al actualizar en la aplicación web) :integer
 #
 # Indexes
 #
