@@ -1,110 +1,22 @@
 <%
-menu_sistema_elements = [
-  { 
-    name: 'MENU USUARIOS', 
-    link: usuarios_path, 
-    class: 'fas fa-users', 
-    action: 'usuarios',
-    text: 'Usuarios', 
-    class_badge: "badge badge-success",
-    registros: conteo(User, 'A', 0)
-  },
-  { 
-    name: 'MENU EMPRESAS', 
-    link: empresas_path, 
-    class: 'fas fa-building', 
-    action: 'empresas',
-    text: 'Empresas', 
-    class_badge: "badge badge-success",
-    registros: conteo(Empresa, 'A', 0)
-  },
-  { 
-    name: 'MENU AREAS EMPRESA', 
-    link: areas_path, 
-    class: 'fas fa-building', 
-    action: 'areas',
-    text: 'Áreas - Empresa', 
-    class_badge: "badge badge-success",
-    registros: conteo(Area, 'A', 0)
-  },
-  { 
-    name: 'MENU USUARIO AREA', 
-    link: personas_areas_path, 
-    class: 'fas fa-users', 
-    action: 'personas_areas',
-    text: 'Usuario - Área', 
-    class_badge: "badge badge-success",
-    registros: conteo(PersonasArea, 'A', 0)
-  },
-  { 
-    name: 'MENU ROL', 
-    link: roles_path, 
-    class: 'fas fa-user-tag', 
-    action: 'roles',
-    text: 'Roles', 
-    class_badge: "badge badge-success",
-    registros: conteo(Rol, 'A', 0)
-  },
-  { 
-    name: 'MENU MENU', 
-    link: menus_path, 
-    class: 'fab fa-elementor', 
-    action: 'menus',
-    text: 'Menús', 
-    class_badge: "badge badge-success",
-    registros: conteo(Menu, 'A', 0)
-  },
-  { 
-    name: 'MENU OPCION MENU', 
-    link: opciones_path, 
-    class: 'fas fa-minus-square', 
-    action: 'opciones',
-    text: 'Menú - Opciones', 
-    class_badge: "badge badge-success",
-    registros: conteo(Opcion, 'A', 0)
-  },
-  { 
-    name: 'MENU MENU ROL', 
-    link: menu_roles_path, 
-    class: 'fas fa-user-cog', 
-    action: 'menu_roles',
-    text: 'Menú - Roles', 
-    class_badge: "badge badge-success",
-    registros: conteo(MenuRol, 'A', 0)
-  },
-  { 
-    name: 'MENU ATRIBUTO', 
-    link: atributos_path, 
-    class: 'fas fa-atom', 
-    action: 'atributos',
-    text: 'Atributos', 
-    class_badge: "badge badge-success",
-    registros: conteo(Atributo, 'A', 0)
-  },
-  { 
-    name: 'MENU COMPONENTE', 
-    link: componentes_path, 
-    class: 'fab fa-codepen', 
-    action: 'componentes',
-    text: 'Componentes', 
-    class_badge: "badge badge-success",
-    registros: conteo(Componente, 'A', 0)
-  }
-].freeze
-%>
+# Cargar todas las opciones del modelo Menu
 
-<%
-menu_sistema_permisos_elements = [
+# Cargar todas las opciones del modelo Opcion
+menu_sistema_elements = Opcion.where(menu_id: 1).where(visible_sidebar: true).order(posicion: :asc).map do |opcion|
   { 
-    name: 'MENU PERMISOS FORMULARIO', 
-    link: opcion_cas_path, 
-    class: 'fas fa-clipboard-list', 
-    action: 'opcion_cas',
-    text: 'Permisos Formulario', 
+    name: "#{opcion.componente_sidebar}", 
+    link: send(opcion.path), 
+    class: opcion.icono, 
+    action: opcion.controlador,
+    text: opcion.nombre, 
     class_badge: "badge badge-success",
-    registros: conteo(OpcionCa, 'A', 0)
+    registros: begin
+      opcion.controlador.classify.constantize.count
+    rescue NameError
+      0
+    end
   }
-].freeze
+end
 %>
 
 <% if menu_sistema_elements.any? { |element| tiene_permiso_sidebar(element[:name], "VER OPCION") } %>
@@ -134,26 +46,7 @@ menu_sistema_permisos_elements = [
             <% end %>
           <% end %>
         <% end %>
-
-        <% if menu_sistema_permisos_elements.any? { |element_permisos| tiene_permiso_sidebar(element_permisos[:name], "VER OPCION") } %>
-          <h6 class="collapse-header">Permiso Documentos:</h6>
-          <% menu_sistema_permisos_elements.each do |element_permisos| %>
-            <% if tiene_permiso_sidebar(element_permisos[:name], "VER OPCION") %>
-              <%= link_to element_permisos[:link], class: is_active_action(element_permisos[:action]) do %>
-                <i class="<%= element_permisos[:class] %>"></i>
-                <span><%= element_permisos[:text] %> <span class="<%= element_permisos[:class_badge] %>"><%= element_permisos[:registros] %></span></span>
-              <% end %>
-            <% end %>
-          <% end %>
-        <% end %>
         <!--FINALIZA VALIDACION DEL OPCIONES PARA MOSTRAR EN EL SIDEBAR -->
-    
-        
-        
-        <%= link_to permisos_path, class: is_active_action("persona_empresa_formularios")  do %>
-          <i class="fas fa-key"></i>
-          <span>Permisos Usuario  <span class="badge badge-success"><%= conteo(PersonaEmpresaFormulario, 'A', 0) %></span></span>
-        <% end %>   
 
       </div>
     </div>
