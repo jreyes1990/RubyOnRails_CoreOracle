@@ -90,9 +90,10 @@ module ApplicationHelper
     end
   end
 
-  # METODOS DE ACTIVACION EN SIDEBAR - ICONOS
-  def is_active_controller_icono_titulo
-    @controladores = ["font_awesomes", "codigo_colores"]
+  # METODOS DE ACTIVACION EN SIDEBAR
+  def is_active_controller_titulo(controlador)
+    @controladores = Array(controlador) # Asegúrate de que controlador sea un array
+
     if @controladores.include? params[:controller]
       "nav-item active"
     else
@@ -100,8 +101,9 @@ module ApplicationHelper
     end
   end
 
-  def is_active_controller_icono
-    @controladores = ["font_awesomes", "codigo_colores"]
+  def is_active_controller(controlador)
+    @controladores = Array(controlador) # Asegúrate de que controlador sea un array
+
     if @controladores.include? params[:controller]
       "nav-link"
     else
@@ -109,36 +111,9 @@ module ApplicationHelper
     end
   end
 
-  def is_active_option_controller_icono
-    @controladores = ["font_awesomes", "codigo_colores"]
-    if @controladores.include? params[:controller]
-      "collapse show"
-    else
-      "collapse"
-    end
-  end
+  def is_active_option_controller(controlador)
+    @controladores = Array(controlador) # Asegúrate de que controlador sea un array
 
-  # METODOS DE ACTIVACION EN SIDEBAR - CONFIGURACIÓN SISTEMA
-  def is_active_controller_sistema_titulo
-    @controladores = ["usuarios","empresas","areas","personas_areas","roles","menus","opciones","menu_roles","atributos","componentes","opcion_cas","persona_empresa_formularios"]
-    if @controladores.include? params[:controller]
-      "nav-item active"
-    else
-      "nav-item"
-    end
-  end
-
-  def is_active_controller_sistema
-    @controladores = ["usuarios","empresas","areas","personas_areas","roles","menus","opciones","menu_roles","atributos","componentes","opcion_cas","persona_empresa_formularios"]
-    if @controladores.include? params[:controller]
-      "nav-link"
-    else
-      "nav-link collapsed"
-    end
-  end
-
-  def is_active_option_controller_sistema
-    @controladores = ["usuarios","empresas","areas","personas_areas","roles","menus","opciones","menu_roles","atributos","componentes","opcion_cas","persona_empresa_formularios"]
     if @controladores.include? params[:controller]
       "collapse show"
     else

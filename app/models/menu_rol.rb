@@ -26,9 +26,10 @@
 #  fk_menurol_rol     (rol_id => roles.id)
 #
 class MenuRol < ApplicationRecord
+  belongs_to :menu
   belongs_to :opcion
   belongs_to :rol
 
-  validates_presence_of :opcion_id, :rol_id, :estado, message: ": este campo es obligatorio"
-  validates :opcion_id, uniqueness: {case_sensitive: false, scope: [:rol_id, :estado], message: "El Menú-Rol que intenta registrar ya existe" }
+  validates_presence_of :menu_id, :opcion_id, :rol_id, :estado, message: ": este campo es obligatorio"
+  validates :opcion_id, uniqueness: {case_sensitive: false, scope: [:menu_id, :rol_id, :estado], message: "El Menú-Rol que intenta registrar ya existe" }
 end

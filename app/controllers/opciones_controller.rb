@@ -1,9 +1,10 @@
 class OpcionesController < ApplicationController
   before_action :set_opcion, only: %i[ show edit update destroy ]
+  # before_action :comprobar_permiso
 
   # GET /opciones or /opciones.json
   def index
-    respond_to do |format|    
+    respond_to do |format|
       format.html
       format.json { render json: OpcionDatatable.new(params, view_context: view_context) }
     end
@@ -103,7 +104,7 @@ class OpcionesController < ApplicationController
     end
   end
 
-  def modal_registro_menu 
+  def modal_registro_menu
     # Consulta para verificar si el nombre del menu a registrar ya existe
     @parametro_nombre_menu = params[:nuevo_menu_form][:nombre]
     @consulta_menu = Menu.where("upper(nombre) LIKE upper('%#{@parametro_nombre_menu}%')").first

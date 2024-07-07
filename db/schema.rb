@@ -169,6 +169,9 @@ ActiveRecord::Schema.define(version: 2024_08_30_051241) do
     t.string "descripcion", comment: "Descripción general del menú"
     t.string "icono", limit: 50, null: false, comment: "Identificador de icono para el menú"
     t.string "codigo_hex", default: "#232323", comment: "Identificador de color, codigo hexadecimal para el menú"
+    t.string "menu_sidebar", comment: "Identificador del menú a utilizar en el sidebar"
+    t.string "visible_sidebar", limit: 1, default: "t", comment: "El menú será visible en el sidebar?"
+    t.integer "posicion", precision: 38, comment: "Orden del menú a utilizar en el sidebar"
     t.integer "user_created_id", precision: 38, null: false, comment: "Identificador de usuario al registrar en la aplicación web"
     t.integer "user_updated_id", precision: 38, comment: "Identificador de usuario al actualizar en la aplicación web"
     t.string "estado", limit: 10, default: "A", null: false, comment: "Estado del menú: [A]: Activo  [I]: Inactivo"
@@ -206,10 +209,12 @@ ActiveRecord::Schema.define(version: 2024_08_30_051241) do
     t.string "icono", limit: 50, comment: "Icono que identificará la opción"
     t.string "path", null: false, comment: "Identificador de ruta de navegación"
     t.string "controlador", limit: 300, null: false, comment: "Identificador de controlador de navegación"
-    t.string "codigo_hex", comment: "Color Hexadecimal que identificará la opción"
+    t.string "codigo_hex", default: "#232323", comment: "Color Hexadecimal que identificará la opción"
     t.string "componente_sidebar", comment: "Identificador el componente a utilizar en el sidebar"
     t.string "visible_sidebar", limit: 1, default: "t", comment: "El componente será visible en el sidebar?"
     t.integer "posicion", precision: 38, comment: "Orden del componente a utilizar en el sidebar"
+    t.integer "sub_opcion_id", precision: 38, default: 1, comment: "Identificador de la subOpción"
+    t.string "nombre_sub_opcion", default: "OPCIONES:", comment: "Nombre de la subOpción"
     t.integer "user_created_id", precision: 38, null: false, comment: "Identificador de usuario al registrar en la aplicación web"
     t.integer "user_updated_id", precision: 38, comment: "Identificador de usuario al actualizar en la aplicación web"
     t.string "estado", limit: 10, default: "A", null: false, comment: "Estado de la opción: [A]: Activo  [I]: Inactivo"
@@ -347,25 +352,6 @@ ActiveRecord::Schema.define(version: 2024_08_30_051241) do
   add_foreign_key "personas_areas", "personas", name: "fk_personarea_persona"
   add_foreign_key "personas_areas", "roles", name: "fk_personarea_rol"
 
-  create_view "opcion_cas_views", sql_definition: <<-SQL
-      select opcion_cas."ID",opcion_cas."OPCION_ID",opcion_cas."COMPONENTE_ID",opcion_cas."ATRIBUTO_ID",opcion_cas."DESCRIPCION",opcion_cas."USER_CREATED_ID",opcion_cas."USER_UPDATED_ID",opcion_cas."ESTADO",opcion_cas."CREATED_AT",opcion_cas."UPDATED_AT",
-  opciones.menu_id, 
-  menus.nombre as nombre_menu, 
-  menus.icono as icono_menu, 
-  menus.codigo_hex as codigo_hex_menu,
-  opciones.nombre as nombre_opcion, 
-  opciones.icono as icono_opcion, 
-  opciones.codigo_hex as codigo_hex_opcion,
-  opciones.path AS path_opcion,
-  opciones.controlador AS controlador_opcion,
-  componentes.nombre as nombre_componente,
-  atributos.nombre as nombre_atributo
-  from opcion_cas 
-  inner join opciones on(opcion_cas.opcion_id=opciones.id)
-  inner join componentes on(opcion_cas.componente_id=componentes.id)
-  inner join atributos on(opcion_cas.atributo_id=atributos.id)
-  inner join menus on(opciones.menu_id=menus.id)
-  SQL
   create_view "areas_views", sql_definition: <<-SQL
       select 
   areas."ID",areas."EMPRESA_ID",areas."CODIGO_AREA",areas."NOMBRE",areas."DESCRIPCION",areas."CODIGO_HEX",areas."USER_CREATED_ID",areas."USER_UPDATED_ID",areas."ESTADO",areas."CREATED_AT",areas."UPDATED_AT", 
@@ -377,7 +363,7 @@ ActiveRecord::Schema.define(version: 2024_08_30_051241) do
   inner join empresas on(areas.empresa_id=empresas.id)
   SQL
   create_view "opciones_views", sql_definition: <<-SQL
-      select opciones."ID",opciones."MENU_ID",opciones."NOMBRE",opciones."DESCRIPCION",opciones."ICONO",opciones."PATH",opciones."CONTROLADOR",opciones."CODIGO_HEX",opciones."COMPONENTE_SIDEBAR",opciones."VISIBLE_SIDEBAR",opciones."POSICION",opciones."USER_CREATED_ID",opciones."USER_UPDATED_ID",opciones."ESTADO",opciones."APLICA_CARGA_MASIVA",opciones."CREATED_AT",opciones."UPDATED_AT",
+      select opciones."ID",opciones."MENU_ID",opciones."NOMBRE",opciones."DESCRIPCION",opciones."ICONO",opciones."PATH",opciones."CONTROLADOR",opciones."CODIGO_HEX",opciones."COMPONENTE_SIDEBAR",opciones."VISIBLE_SIDEBAR",opciones."POSICION",opciones."SUB_OPCION_ID",opciones."NOMBRE_SUB_OPCION",opciones."USER_CREATED_ID",opciones."USER_UPDATED_ID",opciones."ESTADO",opciones."APLICA_CARGA_MASIVA",opciones."CREATED_AT",opciones."UPDATED_AT",
   menus.nombre as nombre_menu, 
   menus.icono as icono_menu, 
   menus.codigo_hex as codigo_hex_menu
@@ -400,6 +386,25 @@ ActiveRecord::Schema.define(version: 2024_08_30_051241) do
   from menu_roles
   inner join opciones on(menu_roles.opcion_id=opciones.id)
   inner join roles on(menu_roles.rol_id=roles.id)
+  inner join menus on(opciones.menu_id=menus.id)
+  SQL
+  create_view "opcion_cas_views", sql_definition: <<-SQL
+      select opcion_cas."ID",opcion_cas."OPCION_ID",opcion_cas."COMPONENTE_ID",opcion_cas."ATRIBUTO_ID",opcion_cas."DESCRIPCION",opcion_cas."USER_CREATED_ID",opcion_cas."USER_UPDATED_ID",opcion_cas."ESTADO",opcion_cas."CREATED_AT",opcion_cas."UPDATED_AT",
+  opciones.menu_id, 
+  menus.nombre as nombre_menu, 
+  menus.icono as icono_menu, 
+  menus.codigo_hex as codigo_hex_menu,
+  opciones.nombre as nombre_opcion, 
+  opciones.icono as icono_opcion, 
+  opciones.codigo_hex as codigo_hex_opcion,
+  opciones.path AS path_opcion,
+  opciones.controlador AS controlador_opcion,
+  componentes.nombre as nombre_componente,
+  atributos.nombre as nombre_atributo
+  from opcion_cas 
+  inner join opciones on(opcion_cas.opcion_id=opciones.id)
+  inner join componentes on(opcion_cas.componente_id=componentes.id)
+  inner join atributos on(opcion_cas.atributo_id=atributos.id)
   inner join menus on(opciones.menu_id=menus.id)
   SQL
   create_view "personas_areas_views", sql_definition: <<-SQL

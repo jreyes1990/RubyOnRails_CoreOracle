@@ -1,54 +1,77 @@
 <%
-# Cargar todas las opciones del modelo Menu
-
-# Cargar todas las opciones del modelo Opcion
-menu_sistema_elements = Opcion.where(menu_id: 1).where(visible_sidebar: true).order(posicion: :asc).map do |opcion|
-  { 
-    name: "#{opcion.componente_sidebar}", 
-    link: send(opcion.path), 
-    class: opcion.icono, 
-    action: opcion.controlador,
-    text: opcion.nombre, 
-    class_badge: "badge badge-success",
-    registros: begin
-      opcion.controlador.classify.constantize.count
-    rescue NameError
-      0
-    end
-  }
-end
+  # Cargar todas las opciones del modelo Menu y Opcion
+  menu_elements = Menu.where(visible_sidebar: true, estado: "A").order(posicion: :asc).map do |menu|
+    {
+      name: menu.nombre, 
+      class: menu.icono, 
+      text_sidebar: menu.menu_sidebar,
+      codigo: menu.id,
+      opciones: Opcion.where(menu_id: menu.id, visible_sidebar: true, estado: "A").order(posicion: :asc).map do |opcion|
+        { 
+          name: opcion.componente_sidebar, 
+          link: send(opcion.path), 
+          class: opcion.icono, 
+          action: opcion.controlador,
+          text: opcion.nombre, 
+          codigo: opcion.menu_id,
+          class_badge: "badge badge-success",
+          sub_opcion_id: opcion.sub_opcion_id,
+          sub_opcion: opcion.nombre_sub_opcion,
+          registros: begin
+            opcion.controlador.classify.constantize.count
+          rescue NameError
+            0
+          end
+        }
+      end
+    }
+  end
 %>
 
-<% if menu_sistema_elements.any? { |element| tiene_permiso_sidebar(element[:name], "VER OPCION") } %>
-  <!-- Divider -->
-  <hr class="sidebar-divider">
+<% menu_elements.each do |menu| %>
+  <% if menu[:opciones].any? { |opcion| tiene_permiso_sidebar(opcion[:name], "VER OPCION") } %>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
 
-  <!-- Heading -->
-  <div class="sidebar-heading">
-    Configuración
-  </div>
-
-  <!-- Nav Item - Pages Collapse Menu -->
-  <li class="<%= is_active_controller_sistema_titulo %>">
-    <a class="menu_sb <%= is_active_controller_sistema %>" href="#" data-toggle="collapse" data-target="#collapseSistema" aria-expanded="true" aria-controls="collapseSistema">
-      <i class="fas fa-fw fa-cog"></i>
-      <span>SISTEMAS</span>
-    </a>
-    <div id="collapseSistema" class="opcion_sb <%= is_active_option_controller_sistema %>" aria-labelledby="headingSistema" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Opciones:</h6>
-        <!--INICIA VALIDACION DE OPCIONES MOSTRAR EN EL SIDEBAR -->
-        <% menu_sistema_elements.each do |element| %>
-          <% if tiene_permiso_sidebar(element[:name], "VER OPCION") %>
-            <%= link_to element[:link], class: is_active_action(element[:action]) do %>
-              <i class="<%= element[:class] %>"></i>
-              <span><%= element[:text] %> <span class="<%= element[:class_badge] %>"><%= element[:registros] %></span></span>
-            <% end %>
-          <% end %>
-        <% end %>
-        <!--FINALIZA VALIDACION DEL OPCIONES PARA MOSTRAR EN EL SIDEBAR -->
-
-      </div>
+    <!-- Heading -->
+    <div class="sidebar-heading">
+      <%= menu[:text_sidebar] %>
     </div>
-  </li>
-<% end %>   
+
+    <% actions = menu[:opciones].map { |opcion| opcion[:action] } %>
+    <% options = menu[:opciones].map { |sub_opcion| [sub_opcion[:codigo], sub_opcion[:sub_opcion_id], sub_opcion[:sub_opcion]] }.uniq { |codigo, sub_opcion_id, sub_opcion| [codigo, sub_opcion_id, sub_opcion] } %>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="<%= is_active_controller_titulo(actions) %>">
+      <a class="menu_sb <%= is_active_controller(actions) %>" href="#" data-toggle="collapse" data-target="#collapse<%= menu[:codigo] %>" aria-expanded="true" aria-controls="collapse<%= menu[:codigo] %>">
+        <i class="<%= menu[:class] %>"></i>
+        <span><%= menu[:name] %></span>
+      </a>
+      <div id="collapse<%= menu[:codigo] %>" class="opcion_sb <%= is_active_option_controller(actions) %>" aria-labelledby="heading<%= menu[:codigo] %>" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <!-- Mostrar opciones para depuración -->
+          <% options.each do |codigo, sub_opcion_id, sub_opcion| %>
+            <h6 class="collapse-header"><%= sub_opcion %></h6>
+            <!-- INICIA VALIDACION DE OPCIONES MOSTRAR EN EL SIDEBAR -->
+            <% menu[:opciones].select { |opcion| (opcion[:codigo] == codigo && opcion[:sub_opcion_id] == sub_opcion_id) }.each do |opcion| %>
+              <% if tiene_permiso_sidebar(opcion[:name], "VER OPCION") %>
+                <%= link_to opcion[:link], class: is_active_action(opcion[:action]) do %>
+                  <i class="<%= opcion[:class] %>"></i>
+                  <span>
+                    <%= opcion[:text] %> 
+                    <!--
+                    <span class="<= opcion[:class_badge] %>">
+                    <= opcion[:registros] %>
+                    </span>
+                    -->
+                  </span>
+                <% end %>
+              <% end %>
+            <% end %>
+            <!-- FINALIZA VALIDACION DEL OPCIONES PARA MOSTRAR EN EL SIDEBAR -->
+          <% end %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+<% end %>

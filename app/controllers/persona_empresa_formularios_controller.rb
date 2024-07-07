@@ -9,7 +9,7 @@ class PersonaEmpresaFormulariosController < ApplicationController
   def search_usuario
     if params[:search_usuario_selected_params].present?
       parametro = params[:search_usuario_selected_params].upcase
-    
+
       @usuarios = PersonasAreaView.select("persona_id id, (nombre_usuario||' - '||email_usuario) nombre_completo_con_email")
                                   .where("estado=? and upper(nombre_usuario||' '||email_usuario) like '%#{parametro}%'",'A')
                                   .distinct
@@ -25,13 +25,13 @@ class PersonaEmpresaFormulariosController < ApplicationController
                                       .distinct
 
       respond_to do |format|
-        format.json { 
+        format.json {
           render json: {
             area_usuario: @area_usuario.map { |p| { valor_id: p.area_id, valor_text: p.nombre_area } }
           }
         }
       end
-    end    
+    end
   end
 
   def consulta_permisos
@@ -76,7 +76,7 @@ class PersonaEmpresaFormulariosController < ApplicationController
 
       @menu_x_role.each do |mxr|
         # Checkbox para seleccionar o deseleccionar todos los campos de atributos
-        select_deselect_all_checkbox = 
+        select_deselect_all_checkbox =
         "<li class='list-group-item d-flex justify-content-between align-items-center flex-wrap'>
           <label for='select-all-#{mxr.opcion.nombre.upcase.gsub ' ', '_'}'>
             <h6>SELECCIONAR</h6>
@@ -95,7 +95,7 @@ class PersonaEmpresaFormulariosController < ApplicationController
             <label for='#{oc.id}'>
               <h6>#{oc.componente.nombre}</h6>
             </label>
-            <span class='text-secondary'>  
+            <span class='text-secondary'>
               <label class='checkbox-label'>
                 <strong style='padding-right: 5px;'>#{oc.atributo.nombre}</strong>
                   <input type='checkbox' name='permisoids[]' value='#{oc.id}' class='#{mxr.opcion.nombre.upcase.gsub " ", "_"}' id='#{oc.id}' checked=true/>
@@ -108,7 +108,7 @@ class PersonaEmpresaFormulariosController < ApplicationController
         # Concatenamos el checkbox adicional al inicio de la lista
         atributos_componentes = select_deselect_all_checkbox+atributos_componentes
 
-        tarjeta = 
+        tarjeta =
           "<div class='col-xs-12 col-sm-6 col-lg-4'>
             <div class='card border-bottom-primary'>
               <div class='card-header text-primary'>
@@ -119,7 +119,7 @@ class PersonaEmpresaFormulariosController < ApplicationController
                   </div>
                   <div class='col-2 text-right' style='margin-top: 15px;'>
                     <a href='#' data-toggle='collapse' data-target='#collapse#{mxr.opcion.nombre.upcase.gsub ' ', '_'}' aria-expanded='true' class=''>
-                      <i class='icon-action fa fa-chevron-down' style='color:#6c6868'></i>                  
+                      <i class='icon-action fa fa-chevron-down' style='color:#6c6868'></i>
                     </a>
                   </div>
                 </div>
@@ -136,11 +136,11 @@ class PersonaEmpresaFormulariosController < ApplicationController
             </div>
             <br>
           </div>
-          
+
           <script>
             document.getElementById('select-all-#{mxr.opcion.nombre.upcase.gsub ' ', '_'}').onclick = function() {
               var checkboxes = document.querySelectorAll('input[class=#{mxr.opcion.nombre.upcase.gsub ' ', '_'}]');
-              for (var checkbox of checkboxes) {                                                      
+              for (var checkbox of checkboxes) {
                 checkbox.checked = this.checked;
                 console.log(checkboxes)
               }
@@ -167,7 +167,7 @@ class PersonaEmpresaFormulariosController < ApplicationController
     atributos_componentes = @atributos_x_opcion.sort_by { |oc| "#{oc.opcion.id} #{oc.atributo.id} #{oc.componente.id}"}.reverse.map do |oc|
       "<li class='list-group-item d-flex justify-content-between align-items-center flex-wrap'>
         <h6>#{oc.componente.nombre}</h6>
-        <span class='text-secondary'>  
+        <span class='text-secondary'>
           <label class='checkbox-label'>
             <strong style='padding-right: 5px;'>#{oc.atributo.nombre}</strong>
             <input type='checkbox' name='permisoids[]' value='#{oc.id}' checked=true/>
@@ -177,7 +177,7 @@ class PersonaEmpresaFormulariosController < ApplicationController
       </li>"
     end.join
 
-    tarjeta = 
+    tarjeta =
       "<div class='col-xs-12 col-sm-6 col-lg-4'>
         <div class='card border-bottom-primary'>
           <div class='card-header text-primary'>
@@ -213,7 +213,7 @@ end
     else
       @tipoAsignacion = "INDIVIDUAL"
     end
-    
+
     if !@permisosSeleccionados.nil?
       @permisosSeleccionados.each do |acpo|
         @valida_registro = PersonaEmpresaFormulario.where(personas_area_id: @personaEA.id, opcion_ca_id: acpo.to_i)
@@ -224,19 +224,20 @@ end
           @permisoUsuario.opcion_ca_id = acpo.to_i
           @permisoUsuario.descripcion = @tipoAsignacion
           @permisoUsuario.estado = "A"
-          @permisoUsuario.save 
+          @permisoUsuario.user_created_id = current_user.id
+          @permisoUsuario.save
         end
       end
       if @tipoAsignacion == "PERFIL"
         @actualizar_rol = PersonasArea.where(area_id: session[:id_area_persona_consulta_permiso], persona_id: session[:id_persona_consulta_permiso]).first.update(rol_id: asigna_rol_persona)
       end
       respond_to do |format|
-        format.html { redirect_to mostrar_permisos_path, notice: "Permisos otorgados al usuario exitosamente" }   
+        format.html { redirect_to mostrar_permisos_path, notice: "Permisos otorgados al usuario exitosamente" }
       end
     else
       respond_to do |format|
-        format.html { redirect_to mostrar_permisos_path, alert: "No se agregó ningun permiso" }             
-      end 
+        format.html { redirect_to mostrar_permisos_path, alert: "No se agregó ningun permiso" }
+      end
     end
   end
 

@@ -11,6 +11,8 @@ class CreateOpciones < ActiveRecord::Migration[6.0]
       t.string :componente_sidebar, null: true, comment: "Identificador el componente a utilizar en el sidebar"
       t.boolean :visible_sidebar, null: true, default: true, comment: "El componente será visible en el sidebar?"
       t.integer :posicion, null: true, comment: "Orden del componente a utilizar en el sidebar"
+      t.integer :sub_opcion_id, null: true, default: 1, comment: "Identificador de la subOpción"
+      t.string :nombre_sub_opcion, null: true, default: "OPCIONES:", comment: "Nombre de la subOpción"
       t.integer :user_created_id, null: false, comment: "Identificador de usuario al registrar en la aplicación web"
       t.integer :user_updated_id, null: true, comment: "Identificador de usuario al actualizar en la aplicación web"
       t.string :estado, limit: 10, null: false, default: "A", comment: "Estado de la opción: [A]: Activo  [I]: Inactivo"

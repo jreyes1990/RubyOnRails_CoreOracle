@@ -14,12 +14,14 @@
 #  icono_menu          :string(50)       not null
 #  nombre              :string(200)      not null
 #  nombre_menu         :string(200)      not null
+#  nombre_sub_opcion   :string(255)
 #  path                :string(255)      not null
 #  posicion            :integer
 #  visible_sidebar     :string(1)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  menu_id             :integer          not null
+#  sub_opcion_id       :integer
 #  user_created_id     :integer          not null
 #  user_updated_id     :integer
 #

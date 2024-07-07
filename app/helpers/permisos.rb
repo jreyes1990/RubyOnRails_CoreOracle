@@ -62,13 +62,11 @@ module Permisos
   def tiene_permiso_sidebar(componente, atributo)
     atributo_encontrado = false
 
-    if !session[:permisosSidebar].nil?
-      session[:permisosSidebar].each do |p|
-        if (p.componente.upcase.eql?(componente.upcase)) && (p.atributo.upcase.eql?(atributo.upcase))
-            atributo_encontrado = true
-        end
+    session[:permisosSidebar].each do |p|
+      if (p.componente.upcase.eql?(componente.upcase)) && (p.atributo.upcase.eql?(atributo.upcase))
+          atributo_encontrado = true
       end
-      return atributo_encontrado
     end
+    return atributo_encontrado
   end
 end

@@ -1,5 +1,5 @@
 # ENV['TZ'] = 'America/Guatemala'
-# ENV['NLS_LANG'] ||= 'AMERICAN_AMERICA.WE8ISO8859P1'
+ENV['NLS_LANG'] = 'AMERICAN_AMERICA.WE8ISO8859P1'
 # ENV['NLS_LANG'] ||= 'SPANISH_MEXICO.AL32UTF8'
 # ENV['TZ'] = 'GT'
 plsql.activerecord_class = ActiveRecord::Base
