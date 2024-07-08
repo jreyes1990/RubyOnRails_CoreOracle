@@ -22,7 +22,7 @@ class EmpresasController < ApplicationController
 
   # POST /empresas or /empresas.json
   def create
-    @flag_new_empresa = params[:empresa][:flag_new_empresa].to_i
+    @flag_new_empresa = params[:empresa][:flag_empresa].to_i
     @empresa = Empresa.new(empresa_params)
     @empresa.estado = "A"
     @empresa.user_created_id = current_user.id
@@ -44,12 +44,15 @@ class EmpresasController < ApplicationController
 
   # PATCH/PUT /empresas/1 or /empresas/1.json
   def update
+    @flag_edit_empresa = params[:empresa][:flag_empresa].to_i
     @empresa.user_updated_id = current_user.id
 
     respond_to do |format|
       if @empresa.update(empresa_params)
-        format.html { redirect_to empresas_url, notice: "La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha actualizado correctamente.".html_safe }
-        format.json { render :show, status: :ok, location: @empresa }
+        if @flag_edit_empresa == 0
+          format.html { redirect_to empresas_url, notice: "La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha actualizado correctamente.".html_safe }
+          format.json { render :show, status: :ok, location: @empresa }
+        end
       else
         format.html { render :edit, status: :unprocessable_entity, alert: "Ocurrio un error al actualizar el Color, Verifique!!.." }
         format.json { render json: @empresa.errors, status: :unprocessable_entity }

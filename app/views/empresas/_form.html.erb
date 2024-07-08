@@ -1,13 +1,13 @@
 <!-- Inicio Empresa -->
 <div class="card shadow">
   <%= simple_form_for(@empresa) do |f| %>
-    <%= f.hidden_field :flag_new_empresa, :value=>  flag_new_empresa %>
+    <%= f.hidden_field :flag_empresa, :value=>  flag_empresa %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-    <% if flag_new_empresa == 1 
+    <% if (flag_empresa == 0 || flag_empresa == 1)
         @retorno = empresas_path
-      elsif flag_new_empresa == 2 
+      elsif flag_empresa == 2 
         @retorno = new_area_path
       end %>
       
@@ -19,9 +19,15 @@
         <div class="col-md-12">
             <div class="form-inputs">
               <div class="row">
-                <div class="col-md-2"><%= f.input :codigo_empresa %></div>
-                <div class="col-md-8"><%= f.input :nombre %></div>
-                <div class="col-md-2"><%= f.input :codigo_hex, input_html: { type: "color" } %></div>
+                <div class="col-md-2">
+                  <%= f.input :codigo_empresa %>
+                </div>
+                <div class="col-md-8">
+                  <%= f.input :nombre %>
+                </div>
+                <div class="col-md-2">
+                  <%= f.input :codigo_hex, input_html: { type: "color" } %>
+                </div>
               </div>
 
               <%= f.input :descripcion, as: :text, input_html: {rows: 3} %>
