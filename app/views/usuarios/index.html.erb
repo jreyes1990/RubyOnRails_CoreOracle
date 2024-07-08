@@ -1,19 +1,19 @@
 <!-- Inicio Usuarios -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Gestión de Usuarios</h6>
-  </div>
-  <div class="card-body">
     <div class="row">
-      <div class="col-md-12 table-responsive-sm text-right">
-        <!--< if tiene_permiso("BOTON NUEVO REGISTRO", "VER") %>-->
+      <div class="col-md-6 table-responsive-sm text-left mt-2">
+        <h5 class="m-0 font-weight-bold text-primary">Gestión de Usuarios</h5>
+      </div>
+      <div class="col-md-6 table-responsive-sm text-right mt-2">
+        <% if tiene_permiso("BOTON NUEVO REGISTRO", "VER") %>
           <%= link_to agregar_usuario_path, class: "btn btn-success btn-sm" do %>
             <span class="icon text-green-50">
                 <i class="fas fa-plus-circle"></i>
             </span>
             <span class="text">AGREGAR</span>
           <% end %>
-        <!--< end %>-->
+        <% end %>
         <%= link_to root_path, class: "btn btn-danger btn-sm" do %>
           <span class="icon text-red-50">
               <i class="fas fa-home"></i>
@@ -22,8 +22,8 @@
         <% end %>
       </div>
     </div>
-    <br>
-
+  </div>
+  <div class="card-body">
     <div class="row">
       <div class="col-md-12 table-responsive-sm">
         <table id="datatable_usuario" class="table table-striped table-hover table-sm table-bordered display" cellspacing="0" style="width:100%">
@@ -48,7 +48,7 @@
                   <td><%= persona.direccion %></td>
                   <td><%= format_estado(persona.estado) %></td>
                   <td class="text-center">
-                  <!--< if tiene_permiso("BOTON ELIMINAR REGISTRO", "VER") %>-->
+                  <% if tiene_permiso("BOTON ELIMINAR REGISTRO", "VER") %>
                     <% if persona.estado == 'A' %>
                       <%= link_to inactivar_persona_path(:id => persona.id), class: "btn btn-outline-danger btn-sm rounded-circle", data: { controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
                                                                                                                     sweetalert_confirm_alert_value: "Inactivar",
@@ -70,7 +70,7 @@
                         <i class="fas fa-toggle-on" style="transform: rotate(360deg)"></i>
                       <% end %>
                     <% end %>
-                  <!--< end %>-->
+                  <% end %>
                   </td>
                 </tr>
               <% end %>

@@ -40,11 +40,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :password_expirable, :password_archivable, :trackable
 
   has_one :persona, dependent: :destroy
-  # after_create :set_persona
+  after_create :set_persona
 
-  # def set_persona
-  #   self.persona = Persona.create()
-  # end
+  def set_persona
+    self.persona = Persona.create()
+  end
 
   def active_for_authentication?
     if self.estado == 'I'

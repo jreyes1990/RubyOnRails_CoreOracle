@@ -1,5 +1,6 @@
 class UsuariosController < ApplicationController
   before_action :set_usuario, only: [:show, :edit, :update, :destroy]
+  before_action :comprobar_permiso
 
   def index
     @personas = Persona.select("personas.*, (personas.nombre||' '||personas.apellido) as nombre_completo, users.email as correo_electronico")
@@ -15,7 +16,7 @@ class UsuariosController < ApplicationController
 
       respond_to do |format|
         format.json { render json: @empresa.map { |p| { valor_id: p.id, valor_text: p.informacion_empresa } } }
-      end 
+      end
     elsif params[:empresa_usuario_params].present?
       empresa_id = params[:empresa_usuario_params]
 
@@ -23,7 +24,7 @@ class UsuariosController < ApplicationController
                       .where("areas.empresa_id = #{empresa_id} and areas.estado = 'A'").limit(50).distinct
 
       respond_to do |format|
-        format.json { 
+        format.json {
           render json: {
             area_empresa: @area.map { |p| { valor_id: p.id, valor_text: p.area_con_codigo } }
           }
@@ -32,7 +33,7 @@ class UsuariosController < ApplicationController
     end
   end
 
-  def new      
+  def new
   end
 
   def agregar_usuario
@@ -40,7 +41,7 @@ class UsuariosController < ApplicationController
   end
 
   def crear_usuario
-    @usuario = User.new(usuario_params)    
+    @usuario = User.new(usuario_params)
     @usuario.user_created_id = current_user.id
     @usuario.estado = "A"
     @usuario.password = generate_secure_password
@@ -119,19 +120,19 @@ class UsuariosController < ApplicationController
                 nil,
                 "A"
               )
-              
-              format.html { redirect_to usuarios_path, notice: 'El Usuario se ha creado exitosamente.' } 
-            else 
+
+              format.html { redirect_to usuarios_path, notice: 'El Usuario se ha creado exitosamente.' }
+            else
               flash[:alert] = "No se pudo asignar la persona a una área, Verifique !!!"
-              redirect_to usuarios_path  
+              redirect_to usuarios_path
             end
-          else 
+          else
             flash[:alert] = "No se pudo crear la persona, Verifique !!!"
-            redirect_to usuarios_path 
+            redirect_to usuarios_path
           end
-        else 
+        else
           flash[:alert] = "No se pudo crear la persona, Verifique !!!"
-          redirect_to usuarios_path 
+          redirect_to usuarios_path
         end
       end
     rescue Exception => e
@@ -139,13 +140,13 @@ class UsuariosController < ApplicationController
     end
   end
 
-  def set_usuario   
-  end 
+  def set_usuario
+  end
 
   def usuario_params
     params.require(:usuario_form).permit(:email, :password )
   end
-  
+
   def persona_params
     params.require(:usuario_form).permit(:nombre, :apellido, :telefono, :chat_id_telegram, :direccion, :user_created_id, :estado)
   end
