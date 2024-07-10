@@ -1,7 +1,7 @@
 default: &default
   adapter: oracle_enhanced
-  encoding: unicode
-  # encoding: utf8
+  # encoding: unicode
+  encoding: utf8
   host: localhost
   port: 1521
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
