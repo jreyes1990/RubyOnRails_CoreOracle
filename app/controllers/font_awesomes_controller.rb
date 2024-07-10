@@ -3,7 +3,7 @@ class FontAwesomesController < ApplicationController
 
   # GET /font_awesomes or /font_awesomes.json
   def index
-    respond_to do |format|    
+    respond_to do |format|
       format.html
       format.json { render json: FontAwesomDatatable.new(params, view_context: view_context) }
     end
@@ -97,131 +97,83 @@ class FontAwesomesController < ApplicationController
   end
 
   def descarga_formato_excel
-    @nombre_columnas = []    
+    @nombre_columnas = []
     @ids_columnas = []
 
-    @nombre_columnas.push("Icono")    
-    @nombre_columnas.push("Prefijo")  
-    @nombre_columnas.push("Termino")  
-    @nombre_columnas.push("Codigo CSS")  
-    @nombre_columnas.push("Tipo Icono")  
+    @nombre_columnas.push("Icono")
+    @nombre_columnas.push("Prefijo")
+    @nombre_columnas.push("Termino")
+    @nombre_columnas.push("Codigo CSS")
+    @nombre_columnas.push("Tipo Icono")
     @ids_columnas.push("I")
     @ids_columnas.push("P")
     @ids_columnas.push("T")
     @ids_columnas.push("CC")
     @ids_columnas.push("TI")
-    
-    render xlsx: 'formato-font_awesome', 
+
+    render xlsx: 'formato-font_awesome',
             template: 'font_awesomes/template_excel_download.xlsx.axlsx'
-  end 
+  end
 
   def carga_excel
     uploaded_io = params[:carga_font_awesome][:archivo_excel]
+    file_path = Rails.root.join('app', 'exceles', uploaded_io.original_filename)
 
-    File.open(Rails.root.join('app','exceles', uploaded_io.original_filename), 'wb') do |file|
-      file.write(uploaded_io.read)      
+    File.open(file_path, 'wb') do |file|
+      file.write(uploaded_io.read)
     end
 
-    archivo_cargado = Roo::Spreadsheet.open(Rails.root.join('app', 'exceles', uploaded_io.original_filename), extension: :xlsx)
-
+    archivo_cargado = Roo::Spreadsheet.open(file_path, extension: :xlsx)
     array_ids = archivo_cargado.row(3)
     usuario_id = current_user.id
 
     contador = 0
     archivo_cargado.each do |fila|
-      #puts "-------------------------------- \nFILAS #{fila}" 
-      #puts "********** IMPRIMIENDO CONTADOR #{contador}"
-      
       if contador > 3
-        
         arrayValores = fila
-      
-        hash = Hash[array_ids.zip arrayValores]          
-        hash.each do |id, valores|
-          #puts "**********linea#{contador}/// IMPRIMIENDO IDS #{id}, CORRESPONDE A #{valores}"   
+        hash = Hash[array_ids.zip arrayValores]
 
-          if id == "I"     
-            id_icono = valores 
+        @codigo_icono = hash["I"].presence || ''
+        @codigo_prefijo = hash["P"].presence || ''
+        @codigo_termino = hash["T"].presence || ''
+        @codigo_css = hash["CC"].presence || ''
+        @codigo_tipo_icono = hash["TI"].presence || ''
 
-            if !id_icono.blank?
-              @codigo_icono = id_icono
-            else
-              @codigo_icono = ''
-            end
-          end
+        next if @codigo_icono.blank? || @codigo_tipo_icono.blank?
 
-          if id == "P"     
-            id_prefijo = valores 
+        font_awesom = FontAwesom.find_or_initialize_by(icono: @codigo_icono)
 
-            if !id_prefijo.blank?
-              @codigo_prefijo = id_prefijo
-            else
-              @codigo_prefijo = ''
-            end
-          end
-
-          if id == "T"     
-            id_termino = valores 
-
-            if !id_termino.blank?
-              @codigo_termino = id_termino
-            else
-              @codigo_termino = ''
-            end
-          end
-
-          if id == "CC"     
-            id_css = valores 
-
-            if !id_css.blank?
-              @codigo_css = id_css
-            else
-              @codigo_css = ''
-            end
-          end
-
-          if id == "TI"     
-            id_tipo_icono = valores 
-
-            if !id_tipo_icono.blank?
-              @codigo_tipo_icono = id_tipo_icono
-            else
-              @codigo_tipo_icono = ''
-            end
-          end
-        end
-        #puts "***************************** ANTES DE GUARDAR, FILA #{contador} \nICONO: #{@codigo_icono} | PREFIJO: #{@codigo_prefijo} | TERMINO: #{@codigo_termino} | CODIGO CSS: #{@codigo_css} | TIPO ICONO: #{@codigo_tipo_icono}"
-        if !@codigo_icono.blank? && !@codigo_tipo_icono.blank?
-          @consulta_awesome = FontAwesom.where(icono: @codigo_icono)
-
-          if @consulta_awesome.blank?
-            @consulta_awesome.each do |elimina|
-              elimina.destroy
-            end
-          
-            @font_awesom = FontAwesom.new
-            @font_awesom.icono = @codigo_icono
-            @font_awesom.prefijo_nombre = @codigo_prefijo
-            @font_awesom.termino = @codigo_termino
-            @font_awesom.observacion = @codigo_termino
-            @font_awesom.codigo_css = @codigo_css
-            @font_awesom.tipo_icono = @codigo_tipo_icono
-            @font_awesom.user_created_id = current_user.id
-            @font_awesom.estado = "A"
-            @font_awesom.save 
-          end
+        if font_awesom.new_record?
+          font_awesom.prefijo_nombre = @codigo_prefijo
+          font_awesom.termino = @codigo_termino
+          font_awesom.observacion = @codigo_termino
+          font_awesom.codigo_css = @codigo_css
+          font_awesom.tipo_icono = @codigo_tipo_icono
+          font_awesom.user_created_id = current_user.id
+          font_awesom.estado = "A"
+          font_awesom.save
+        else
+          font_awesom.update(
+            prefijo_nombre: @codigo_prefijo,
+            termino: @codigo_termino,
+            observacion: @codigo_termino,
+            codigo_css: @codigo_css,
+            tipo_icono: @codigo_tipo_icono,
+            user_created_id: current_user.id,
+            estado: "A"
+          )
         end
       end
-      contador = contador + 1
+      contador += 1
     end
 
-    File.delete(Rails.root.join('app', 'exceles', uploaded_io.original_filename))
+    File.delete(file_path)
 
     respond_to do |format|
-      format.html { redirect_to carga_masiva_awesome_path, notice: "La carga se ha procesado exitosamente."  }
+      format.html { redirect_to carga_masiva_awesome_path, notice: "La carga se ha procesado exitosamente." }
       format.json { render :show, status: :created, location: @font_awesom }
     end
-  end 
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
