@@ -3,21 +3,17 @@
 ### URL: https://yarnpkg.com/package/startbootstrap-sb-admin-2
     yarn add startbootstrap-sb-admin-2
 
-
 ## POPPER
 ### URL: https://yarnpkg.com/package/@popperjs/core
     yarn add @popperjs/core
-
 
 ## DATATABLES.NET
 ### URL: https://yarnpkg.com/package/datatables.net
     yarn add datatables.net
 
-
 ## DATATABLES.NET-BUTTONS-BS4
 ### URL: https://yarnpkg.com/package/datatables.net-buttons-bs4
     yarn add datatables.net-buttons-bs4
-
 
 ## PDFMAKE
 ### URL: https://yarnpkg.com/package/pdfmake
@@ -39,3 +35,13 @@
 ### URL: https://sweetalert2.github.io/
 ### URL: https://codigonautas.com/creacion-de-bonitos-mensajes-emergentes-con-sweetalert2/
     yarn add sweetalert2
+
+## ROW-GROUPING
+### URL: https://yarnpkg.com/package/datatables.net-rowgroup-bs4
+### URL: https://cdn.datatables.net/
+    yarn add datatables.net-rowgroup-bs4@1.2.0
+
+## DATATABLE-RESPONSIVE
+### URL: https://www.youtube.com/watch?v=HIDn_HpEuEQ
+#### Se instalo datatables.net-responsive-bs4 para tener una tabla responsiva
+    yarn add datatables.net-responsive-bs4
