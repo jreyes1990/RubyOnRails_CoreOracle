@@ -1,2 +1,4 @@
-# RubyOnRails_CoreRails
-Nueva aplicacion (Core) en ruby on rails
+# USO DE YARN
+## SB-ADMINS-2, 
+### URL: https://yarnpkg.com/package/startbootstrap-sb-admin-2
+    yarn add startbootstrap-sb-admin-2
