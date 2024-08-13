@@ -1,6 +1,7 @@
 class CreateEmpresas < ActiveRecord::Migration[6.0]
   def change
-    create_table :empresas do |t|
+    create_table :empresas, id: false do |t|
+      t.integer :id, null: false
       t.integer :codigo_empresa, null: false, comment: "Identificador codigo de la empresa"
       t.string :nombre, limit: 200, null: false, comment: "Nombre de la empresa"
       t.string :descripcion, null: true, comment: "Descripción general de la empresa"
@@ -12,6 +13,17 @@ class CreateEmpresas < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
+    # Crear una secuencia para autoincrementar la columna id
+    execute <<-SQL
+      CREATE SEQUENCE empresas_seq START WITH 1 INCREMENT BY 1
+    SQL
+
+    # Crear el índice y la restricción de clave primaria con un nombre específico
+    execute <<-SQL
+      ALTER TABLE empresas ADD
+        CONSTRAINT pk_empresa PRIMARY KEY (id)
+    SQL
+
     # Agregar el constraint CHECK sin el punto y coma al final
     execute <<-SQL
       alter table empresas add(
@@ -20,6 +32,16 @@ class CreateEmpresas < ActiveRecord::Migration[6.0]
         enable validate
       )
     SQL
+
+    # Crear un trigger para asignar el valor de la secuencia a la columna id
+    # execute <<-SQL
+    #   CREATE OR REPLACE TRIGGER trg_empresas
+    #   BEFORE INSERT ON empresas
+    #   FOR EACH ROW
+    #   BEGIN
+    #     :new.id := empresas_seq.NEXTVAL;
+    #   END;
+    # SQL
 
     # Agregar comentarios a la tabla
     execute <<-SQL
